@@ -10,36 +10,37 @@ public class PlayerMovement : MonoBehaviour
     //todo Cambiarlo a un scriptable object con los settings del movimiento del player
     [SerializeField] private float speed;
     
-    // private PlayerInputActions _playerInputActions;
-    private Vector2 _movement;
+    private Vector2 _input;
+    private Rigidbody _rigidbody;
     
     private void Awake()
     {
-        // _playerInputActions = new PlayerInputActions();
-        
+        _rigidbody = GetComponent<Rigidbody>();
     }
-    // private void OnEnable()
-    // {
-    //     _playerInputActions.PlayerMaps.Enable();
-    //     _playerInputActions.PlayerMaps.Movement.performed += OnMovement;
-    //     _playerInputActions.PlayerMaps.Movement.canceled += OnMovement;
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     _playerInputActions.PlayerMaps.Disable();
-    //     _playerInputActions.PlayerMaps.Movement.performed -= OnMovement;
-    //     _playerInputActions.PlayerMaps.Movement.canceled -= OnMovement;
-    // }
-
-    private void Update()
+    
+    private void FixedUpdate()
     {
-        Debug.Log(_movement);
+        Move();
         
     }
+    
     public void OnMovement(Vector2 context)
     {
-        _movement = context;
+        _input = context;
+        
+    }
+
+    private void Move()
+    {
+        if (_input.sqrMagnitude < Mathf.Epsilon) return;
+        
+        Vector3 direction = transform.right * _input.x + transform.forward * _input.y;
+
+        direction.Normalize();
+
+        Vector3 newPosition = _rigidbody.position + direction * (speed * Time.fixedDeltaTime);
+        _rigidbody.MovePosition(newPosition);
+        
     }
 
     
