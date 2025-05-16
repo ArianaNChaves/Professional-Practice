@@ -4,7 +4,19 @@ using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour, IDamagable
 {
+    //Stats
     [SerializeField] protected float health;
+    [SerializeField] protected float damage;
+    [SerializeField] protected float attackRange;
+    //Movement
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float rotationSpeed;
+    [SerializeField] protected Transform enemyVisual;
+    [SerializeField] protected Transform _target;
+    
+    // protected Transform _target;
+    protected Vector3 _targetDirection;
+    protected Rigidbody _rigidbody;
     protected enum State
     {
         Idle,
@@ -12,16 +24,34 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         Attacking
     }
     
-    private State _currentState;
+    protected State _currentState;
 
     private void Start()
     {
-        _currentState = State.Idle;  
+        _currentState = State.Idle; 
     }
 
     protected void ChangeState(State newState)
     {
         _currentState = newState;
+        switch (_currentState)
+        {
+            case State.Idle:
+            {
+                //nose
+                break;
+            }
+            case State.Moving:
+            {
+                //nose
+                break;
+            }
+            case State.Attacking:
+            {
+                //attack coroutine
+                break;
+            }
+        }
     }
 
     public void TakeDamage(float damage)
@@ -38,6 +68,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     {
         gameObject.SetActive(false);
     }
-    
-    
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+    }
+
+    protected abstract IEnumerator Moving();
 }
