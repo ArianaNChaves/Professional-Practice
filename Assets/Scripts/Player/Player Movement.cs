@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float rotationSpeed = 10f;
     
+    [SerializeField] private Animator animator;
     private Vector2 _input;
     private Rigidbody _rigidbody;
     private bool _canMove = true;
@@ -33,9 +34,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        if (!_canMove) return;
-        if (_input.sqrMagnitude < Mathf.Epsilon) return;
+        if (!_canMove)
+        {
+            //animator.SetBool("isMoving", false);
+            return;
+        }
+        if (_input.sqrMagnitude < Mathf.Epsilon)
+        {
+            //animator.SetBool("isMoving", false);
+            return;
+        }
         
+        //animator.SetBool("isMoving", true);
         Vector3 direction = transform.right * _input.x + transform.forward * _input.y;
 
         direction.Normalize();
