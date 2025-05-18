@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class BaseEnemy : MonoBehaviour, IDamagable
 {
@@ -10,13 +11,16 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     [SerializeField] protected float attackRange;
     //Movement
     [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float startingWaitTime;
     [SerializeField] protected float rotationSpeed;
     [SerializeField] protected Transform enemyVisual;
-    [SerializeField] protected Transform _target;
+    [SerializeField] protected Transform target;
     
     // protected Transform _target;
-    protected Vector3 _targetDirection;
-    protected Rigidbody _rigidbody;
+    protected Vector3 TargetDirection;
+    protected Rigidbody Rigidbody;
+    protected float Distance;
+    protected bool IsInRange;
     protected enum State
     {
         Idle,
@@ -24,34 +28,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         Attacking
     }
     
-    protected State _currentState;
-
-    private void Start()
+    protected State CurrentState;
+    
+    protected virtual void ChangeState(State newState)
     {
-        _currentState = State.Idle; 
-    }
-
-    protected void ChangeState(State newState)
-    {
-        _currentState = newState;
-        switch (_currentState)
-        {
-            case State.Idle:
-            {
-                //nose
-                break;
-            }
-            case State.Moving:
-            {
-                //nose
-                break;
-            }
-            case State.Attacking:
-            {
-                //attack coroutine
-                break;
-            }
-        }
+        CurrentState = newState;
     }
 
     public void TakeDamage(float damage)
@@ -71,8 +52,10 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
 
     public void SetTarget(Transform target)
     {
-        _target = target;
+        this.target = target;
     }
 
     protected abstract IEnumerator Moving();
+    protected abstract IEnumerator Idling();
+    protected abstract IEnumerator Attacking();
 }
