@@ -14,7 +14,6 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float startingWaitTime;
     [SerializeField] protected float rotationSpeed;
-    [SerializeField] protected Transform enemyVisual;
     [SerializeField] protected GameObject target;
 
     [SerializeField] protected EnemyAnimation enemyAnimation;
@@ -41,6 +40,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.Log(health);
         if (health <= 0)
         {
             health = 0;

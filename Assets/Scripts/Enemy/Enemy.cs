@@ -16,11 +16,15 @@ public class Enemy : BaseEnemy
     {
         CheckDistance();
     }
-    
+
+    private void FixedUpdate()
+    {
+        FaceTarget();
+    }
+
 
     protected override void ChangeState(State newState)
     {
-        Debug.Log($"State: {newState}");
         StopAllCoroutines();
         CurrentState = newState;
         switch (CurrentState)
@@ -67,11 +71,11 @@ public class Enemy : BaseEnemy
             Vector3 newVelocity = TargetDirection * moveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
 
-            if (EnemyRigidbody.velocity.sqrMagnitude > 0.01f)
-            {
-                Quaternion newRotation = Quaternion.LookRotation(target.transform.position);
-                EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
-            }
+            // if (EnemyRigidbody.velocity.sqrMagnitude > 0.01f)
+            // {
+            //     Quaternion newRotation = Quaternion.LookRotation(target.transform.position);
+            //     EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
+            // }
             
             yield return new WaitForFixedUpdate();
         }
@@ -94,19 +98,27 @@ public class Enemy : BaseEnemy
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
-            EnemyRigidbody.velocity = Vector3.zero;
             if (Distance > attackRange)
             {
                 IsInRange = false;
                 ChangeState(State.Moving);
             }
-
+            EnemyRigidbody.velocity = Vector3.zero;
             enemyAnimation.AttackingAnimation();
-            targetDamageable.TakeDamage(damage);
+            targetDamageable?.TakeDamage(damage);
             yield return new WaitForSeconds(attackRate);
-            
             yield return new WaitForFixedUpdate();
         }
+    }
+    
+    private void FaceTarget()
+    {
+        if (!target) return;
+        Vector3 newDirection = (target.transform.position - transform.position).normalized;
+        newDirection.y = 0f;
+        if (newDirection.sqrMagnitude < 0.001f) return;
+        Quaternion newRotation = Quaternion.LookRotation(newDirection);
+        EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
     }
 
     private void CheckDistance()
