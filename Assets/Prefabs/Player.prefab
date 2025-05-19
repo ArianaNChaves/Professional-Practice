@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7574216111796937845}
   - component: {fileID: 5395671430379005124}
   - component: {fileID: 7903988203517659930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerVisual: {fileID: 5942842773832737215}
-  speed: 8
+  speed: 10
   rotationSpeed: 8
   animator: {fileID: 6516058509164554308}
 --- !u!114 &8185309194155328254
@@ -197,9 +197,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1182816051782403424}
     m_Modifications:
+    - target: {fileID: 559702706545849515, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106125318760408724, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2466317061452167961, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
       propertyPath: m_Name
       value: Player Animation Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466317061452167961, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642179206232083902, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5003489065083701081, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -240,6 +256,38 @@ PrefabInstance:
     - target: {fileID: 5003489065083701081, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223886929213282139, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511043785144307069, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574460609978577970, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886476350264058006, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6477292886069941269, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022654067077200327, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495282973516621626, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662806137790943447, guid: e1a66ebfb6808c24a9ba5584375d3c5c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

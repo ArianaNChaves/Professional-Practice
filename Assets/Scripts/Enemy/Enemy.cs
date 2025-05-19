@@ -21,8 +21,8 @@ public class Enemy : BaseEnemy
     {
         FaceTarget();
     }
-
-
+    
+    
     protected override void ChangeState(State newState)
     {
         StopAllCoroutines();
