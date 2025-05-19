@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d19803fe95e6f4db8fc5e6d2831f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 2
   damage: 2
   attackRange: 3
   attackRate: 2
@@ -297,6 +297,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e10969b61e7f9d42a09aa7376383816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &342644722 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5756474805168235023, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
+  m_PrefabInstance: {fileID: 1680631344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &342644724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1182816051782403424, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
@@ -716,7 +721,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42056945, y: 0, z: 0, w: 0.90726036}
+  m_LocalRotation: {x: 0.39028654, y: -0.000000020136913, z: 0.000000008536138, w: 0.92069346}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -772,6 +777,7 @@ GameObject:
   - component: {fileID: 1059901836}
   - component: {fileID: 1059901837}
   - component: {fileID: 1059901838}
+  - component: {fileID: 1059901839}
   m_Layer: 0
   m_Name: Ball Follower
   m_TagString: Untagged
@@ -899,14 +905,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059901830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f50f241fa9d48174fbe03f85e6cc2f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 342644724}
-  maxDistance: 3
-  ropeTension: 10
+  maxDistance: 4
+  ropeTension: 30
 --- !u!114 &1059901838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,10 +928,34 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 512
-  collisionRange: 7.3
-  damage: 0
+  collisionRange: 1
+  damage: 2
   basicMaterial: {fileID: 2100000, guid: 84ff22cc39963784d9fc11c5c4c6626b, type: 2}
   canCollisionMaterial: {fileID: 2100000, guid: 4e85917292a3ef74ba5fa7b32d3a6667, type: 2}
+--- !u!145 &1059901839
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059901830}
+  m_ConnectedBody: {fileID: 342644722}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.5000001, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 30
+  m_Damper: 2
+  m_MinDistance: 4
+  m_MaxDistance: 6
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &1170671423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1613,6 +1643,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6085065543427463547, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6427455429432605445, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1677,7 +1711,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1222593066}
+  m_LookAt: {fileID: 342644724}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60.000004
@@ -1706,7 +1740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087232508}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42056945, y: 0, z: 0, w: 0.90726036}
+  m_LocalRotation: {x: 0.39028654, y: -0.000000020136913, z: 0.000000008536138, w: 0.92069346}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

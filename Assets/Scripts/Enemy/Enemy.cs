@@ -52,7 +52,17 @@ public class Enemy : BaseEnemy
 
     protected override void Death()
     {
+        StopAllCoroutines();
         enemyAnimation.DeathAnimation();
+        EnemyRigidbody.useGravity = false;
+        EnemyRigidbody.AddForce(Vector3.up * 8, ForceMode.Impulse);
+        // EnemyRigidbody.velocity = Vector3.zero;
+        Invoke(nameof(DisableAfterSeconds), 5f);
+    }
+
+    private void DisableAfterSeconds()
+    {
+        gameObject.SetActive(false);
     }
     
     protected override IEnumerator Moving()
@@ -70,12 +80,6 @@ public class Enemy : BaseEnemy
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * moveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
-
-            // if (EnemyRigidbody.velocity.sqrMagnitude > 0.01f)
-            // {
-            //     Quaternion newRotation = Quaternion.LookRotation(target.transform.position);
-            //     EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
-            // }
             
             yield return new WaitForFixedUpdate();
         }

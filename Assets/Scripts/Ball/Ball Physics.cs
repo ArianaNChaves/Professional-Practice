@@ -7,7 +7,7 @@ public class BallPhysics : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float maxDistance = 5f;
-    [SerializeField] private float ropeTension   = 20f;
+    [SerializeField] private float ropeTension = 20f;
     
     private Rigidbody _rigidbody;
 

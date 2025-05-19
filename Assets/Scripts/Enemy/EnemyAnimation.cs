@@ -21,6 +21,6 @@ public class EnemyAnimation : MonoBehaviour
     }
     public void DeathAnimation()
     {
-        animator.CrossFade("die", 0f);
+        animator.Play("die");
     }
 }

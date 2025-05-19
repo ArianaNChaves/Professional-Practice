@@ -22,7 +22,6 @@ public class BallCollisions : MonoBehaviour
         if (_rigidbody.velocity.magnitude >= collisionRange)
         {
             gameObject.GetComponent<MeshRenderer>().material = canCollisionMaterial;
-            Debug.Log("Golpea"); 
         }
         else
         {
