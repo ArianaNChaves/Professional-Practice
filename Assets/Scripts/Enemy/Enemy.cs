@@ -8,7 +8,7 @@ public class Enemy : BaseEnemy
 {
     private void Awake()
     {
-        Rigidbody = GetComponent<Rigidbody>();
+        EnemyRigidbody = GetComponent<Rigidbody>();
         ChangeState(State.Idle);
     }
 
@@ -54,14 +54,14 @@ public class Enemy : BaseEnemy
                 IsInRange = true;
                 ChangeState(State.Attacking);
             }
-            TargetDirection = (target.position - Rigidbody.position).normalized;
+            TargetDirection = (target.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * moveSpeed;
-            Rigidbody.velocity = Vector3.SmoothDamp(Rigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
+            EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
 
-            if (Rigidbody.velocity.sqrMagnitude > 0.01f)
+            if (EnemyRigidbody.velocity.sqrMagnitude > 0.01f)
             {
-                Quaternion newRotation = Quaternion.LookRotation(Rigidbody.velocity);
-                Rigidbody.MoveRotation(Quaternion.Slerp(Rigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
+                Quaternion newRotation = Quaternion.LookRotation(EnemyRigidbody.velocity);
+                EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
             }
             yield return new WaitForFixedUpdate();
         }
@@ -77,7 +77,7 @@ public class Enemy : BaseEnemy
     {
         while (CurrentState == State.Attacking && IsInRange)
         {
-            Rigidbody.velocity = Vector3.zero;
+            EnemyRigidbody.velocity = Vector3.zero;
             if (Distance > attackRange)
             {
                 IsInRange = false;

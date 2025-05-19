@@ -18,7 +18,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
     
     // protected Transform _target;
     protected Vector3 TargetDirection;
-    protected Rigidbody Rigidbody;
+    protected Rigidbody EnemyRigidbody;
     protected float Distance;
     protected bool IsInRange;
     protected enum State
