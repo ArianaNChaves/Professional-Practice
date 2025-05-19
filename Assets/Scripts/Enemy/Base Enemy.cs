@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class BaseEnemy : MonoBehaviour, IDamagable
+public abstract class BaseEnemy : MonoBehaviour, IDamageable
 {
     //Stats
     [SerializeField] protected float health;
     [SerializeField] protected float damage;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected float attackRate;
     //Movement
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float startingWaitTime;
     [SerializeField] protected float rotationSpeed;
     [SerializeField] protected Transform enemyVisual;
-    [SerializeField] protected Transform target;
+    [SerializeField] protected GameObject target;
     
     // protected Transform _target;
     protected Vector3 TargetDirection;
@@ -50,9 +51,9 @@ public abstract class BaseEnemy : MonoBehaviour, IDamagable
         gameObject.SetActive(false);
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(GameObject newTarget)
     {
-        this.target = target;
+        this.target = newTarget;
     }
 
     protected abstract IEnumerator Moving();

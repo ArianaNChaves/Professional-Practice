@@ -272,13 +272,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  damage: 0
+  damage: 2
   attackRange: 5
+  attackRate: 3
   moveSpeed: 5
   startingWaitTime: 2
   rotationSpeed: 3
   enemyVisual: {fileID: 324789310}
-  target: {fileID: 1222593066}
+  target: {fileID: 1222593062}
 --- !u!1 &507067457
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42056945, y: 0, z: 0, w: 0.90726036}
+  m_LocalRotation: {x: 0.42056942, y: 0, z: 0, w: 0.90726036}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -881,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1222593066}
-  maxDistance: 3
+  maxDistance: 5
   ropeTension: 35
 --- !u!1 &1186278612
 GameObject:
@@ -1024,6 +1025,7 @@ GameObject:
   - component: {fileID: 1222593069}
   - component: {fileID: 1222593068}
   - component: {fileID: 1222593071}
+  - component: {fileID: 1222593072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1158,6 +1160,7 @@ MonoBehaviour:
   playerVisual: {fileID: 638123623}
   speed: 8
   rotationSpeed: 8
+  animator: {fileID: 0}
 --- !u!114 &1222593071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,6 +1173,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74485cb796c367a4b98de89011d86093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1222593072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222593062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5787a1b95368b245b06753499b87127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
 --- !u!1 &1266825665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087232508}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42056945, y: 0, z: 0, w: 0.90726036}
+  m_LocalRotation: {x: 0.42056942, y: 0, z: 0, w: 0.90726036}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

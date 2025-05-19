@@ -54,7 +54,7 @@ public class Enemy : BaseEnemy
                 IsInRange = true;
                 ChangeState(State.Attacking);
             }
-            TargetDirection = (target.position - EnemyRigidbody.position).normalized;
+            TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * moveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
 
@@ -75,6 +75,12 @@ public class Enemy : BaseEnemy
 
     protected override IEnumerator Attacking()
     {
+        IDamageable targetDamageable = target.GetComponent<IDamageable>();
+        if (targetDamageable == null)
+        {
+            ChangeState(State.Idle);
+            yield return null;
+        }
         while (CurrentState == State.Attacking && IsInRange)
         {
             EnemyRigidbody.velocity = Vector3.zero;
@@ -83,12 +89,17 @@ public class Enemy : BaseEnemy
                 IsInRange = false;
                 ChangeState(State.Moving);
             }
+
+            yield return new WaitForSeconds(attackRate);
+            targetDamageable.TakeDamage(damage);
+            
+            
             yield return new WaitForFixedUpdate();
         }
     }
 
     private void CheckDistance()
     {
-        Distance = Vector3.Distance(transform.position, target.position);
+        Distance = Vector3.Distance(transform.position, target.transform.position);
     }
 }
