@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -12,14 +13,8 @@ public class PlayerAnimation : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate() {
-        if (_rigidbody.velocity.magnitude > 0f)
-        {
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
-        }
+    private void FixedUpdate()
+    {
+        animator.SetBool(IsMoving, _rigidbody.velocity.magnitude > 0f);
     }
 }

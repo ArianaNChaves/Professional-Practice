@@ -16,6 +16,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     [SerializeField] protected float rotationSpeed;
     [SerializeField] protected Transform enemyVisual;
     [SerializeField] protected GameObject target;
+
+    [SerializeField] protected EnemyAnimation enemyAnimation;
     
     // protected Transform _target;
     protected Vector3 TargetDirection;
@@ -46,10 +48,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         }
     }
 
-    protected void Death()
-    {
-        gameObject.SetActive(false);
-    }
+    protected abstract void Death();
 
     public void SetTarget(GameObject newTarget)
     {

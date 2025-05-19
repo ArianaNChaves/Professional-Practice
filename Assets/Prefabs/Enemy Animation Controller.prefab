@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8748038988477600430}
   - component: {fileID: 2844282244642989789}
+  - component: {fileID: 4796150547189619244}
   m_Layer: 0
   m_Name: Enemy Animation Controller
   m_TagString: Untagged
@@ -42,7 +43,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6553588575536276464}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: bf7531828f3d48f498fa1e55aee9d672, type: 3}
+  m_Avatar: {fileID: 9000000, guid: ed55e300d5751f249b4079ff7f64029f, type: 3}
   m_Controller: {fileID: 9100000, guid: 716cd9a79da2cce43afbf84ccccc49f7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -54,6 +55,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4796150547189619244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553588575536276464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c215ee9face1d045aaaa0f0b14f2c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2844282244642989789}
 --- !u!1001 &2665746706837242053
 PrefabInstance:
   m_ObjectHideFlags: 0

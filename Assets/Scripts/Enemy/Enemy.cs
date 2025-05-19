@@ -16,9 +16,11 @@ public class Enemy : BaseEnemy
     {
         CheckDistance();
     }
+    
 
     protected override void ChangeState(State newState)
     {
+        Debug.Log($"State: {newState}");
         StopAllCoroutines();
         CurrentState = newState;
         switch (CurrentState)
@@ -43,12 +45,19 @@ public class Enemy : BaseEnemy
                 break;
         }
     }
+
+    protected override void Death()
+    {
+        enemyAnimation.DeathAnimation();
+    }
     
     protected override IEnumerator Moving()
     {
         Vector3 initialVelocity = Vector3.zero;
+        if (!target) yield return null;
         while (CurrentState == State.Moving)
         {
+            enemyAnimation.WalkingAnimation();
             if (Distance <= attackRange)
             {
                 IsInRange = true;
@@ -60,15 +69,17 @@ public class Enemy : BaseEnemy
 
             if (EnemyRigidbody.velocity.sqrMagnitude > 0.01f)
             {
-                Quaternion newRotation = Quaternion.LookRotation(EnemyRigidbody.velocity);
+                Quaternion newRotation = Quaternion.LookRotation(target.transform.position);
                 EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
             }
+            
             yield return new WaitForFixedUpdate();
         }
     }
-
+    
     protected override IEnumerator Idling()
     {
+        enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
         ChangeState(State.Moving);
     }
@@ -76,7 +87,7 @@ public class Enemy : BaseEnemy
     protected override IEnumerator Attacking()
     {
         IDamageable targetDamageable = target.GetComponent<IDamageable>();
-        if (targetDamageable == null)
+        if (targetDamageable == null || !target)
         {
             ChangeState(State.Idle);
             yield return null;
@@ -90,9 +101,9 @@ public class Enemy : BaseEnemy
                 ChangeState(State.Moving);
             }
 
-            yield return new WaitForSeconds(attackRate);
+            enemyAnimation.AttackingAnimation();
             targetDamageable.TakeDamage(damage);
-            
+            yield return new WaitForSeconds(attackRate);
             
             yield return new WaitForFixedUpdate();
         }
