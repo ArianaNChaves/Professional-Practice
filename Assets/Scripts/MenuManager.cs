@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private string playSceneName;
     [SerializeField] private string creditsSceneName;
+    [SerializeField] private string mainMenuSceneName;
 
     public void PlayGame()
     {
@@ -16,6 +17,11 @@ public class MenuManager : MonoBehaviour
     public void ShowCredits()
     {
         SceneManager.LoadScene(creditsSceneName);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     public void QuitGame()
