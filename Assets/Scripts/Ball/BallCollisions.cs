@@ -7,12 +7,14 @@ public class BallCollisions : MonoBehaviour
 {
     [SerializeField] private LayerMask collisionMask;
     [SerializeField, Range(1f, 11f)] private float collisionRange;
-    [SerializeField] private float damage;
+    [SerializeField] private PlayerSO playerData;
+    private float _damage;
     
     Rigidbody _rigidbody;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _damage = playerData.Damage;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -24,7 +26,7 @@ public class BallCollisions : MonoBehaviour
             {
                 if (other.gameObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(damage); 
+                    damageable.TakeDamage(_damage); 
                 }
                 
             }

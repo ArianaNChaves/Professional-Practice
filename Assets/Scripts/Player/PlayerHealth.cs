@@ -1,23 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float health;
+    private UnityEvent OnDeath;
+    [SerializeField] private PlayerSO playerData;
     
+    private float _health;
+
+    private void Awake()
+    {
+        _health = playerData.MaxHealth;
+    }
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        _health -= damage;
+        if (_health <= 0)
         {
-            health = 0;
+            _health = 0;
             Death();
         }
     }
 
     private void Death()
     {
+        OnDeath?.Invoke();
         gameObject.SetActive(false);
     }
 }

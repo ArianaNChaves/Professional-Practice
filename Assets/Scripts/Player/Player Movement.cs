@@ -9,10 +9,11 @@ public class PlayerMovement : MonoBehaviour
 {
     //todo Cambiarlo a un scriptable object con los settings del movimiento del player
     [SerializeField] private Transform playerVisual;
-    [SerializeField] private float speed;
+    [SerializeField] private PlayerSO playerData;
     [SerializeField] private float rotationSpeed = 10f;
     
     [SerializeField] private Animator animator;
+    private float _speed;
     private Vector2 _input;
     private Rigidbody _rigidbody;
     private bool _canMove = true;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _speed = playerData.Speed;
     }
     
     private void FixedUpdate()
@@ -36,23 +38,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_canMove)
         {
-            //animator.SetBool("isMoving", false);
             return;
         }
         if (_input.sqrMagnitude < Mathf.Epsilon)
         {
-            //animator.SetBool("isMoving", false);
             return;
         }
         
-        //animator.SetBool("isMoving", true);
         Vector3 direction = transform.right * _input.x + transform.forward * _input.y;
 
         direction.Normalize();
         
         Rotation(direction);
         
-        Vector3 newPosition = _rigidbody.position + direction * (speed * Time.fixedDeltaTime);
+        Vector3 newPosition = _rigidbody.position + direction * (_speed * Time.fixedDeltaTime);
         _rigidbody.MovePosition(newPosition);
         
     }

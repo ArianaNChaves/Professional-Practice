@@ -5,20 +5,17 @@ using UnityEngine.Serialization;
 
 public abstract class BaseEnemy : MonoBehaviour, IDamageable
 {
-    //Stats
-    [SerializeField] protected float health;
-    [SerializeField] protected float damage;
-    [SerializeField] protected float attackRange;
-    [SerializeField] protected float attackRate;
-    //Movement
-    [SerializeField] protected float moveSpeed;
     [SerializeField] protected float startingWaitTime;
     [SerializeField] protected float rotationSpeed;
     [SerializeField] protected GameObject target;
-
     [SerializeField] protected EnemyAnimation enemyAnimation;
+    [SerializeField] protected EnemySO enemyData;
     
-    // protected Transform _target;
+    protected float MoveSpeed;
+    protected float Health;
+    protected float Damage;
+    protected float AttackRange;
+    protected float AttackRate;
     protected Vector3 TargetDirection;
     protected Rigidbody EnemyRigidbody;
     protected float Distance;
@@ -28,6 +25,15 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         Idle,
         Moving,
         Attacking
+    }
+
+    protected virtual void Awake()
+    {
+        MoveSpeed = enemyData.Speed;
+        AttackRange = enemyData.AttackRange;
+        AttackRate = enemyData.AttackRate;
+        Damage = enemyData.Damage;
+        Health = enemyData.MaxHealth;
     }
     
     protected State CurrentState;
@@ -39,11 +45,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        Debug.Log(health);
-        if (health <= 0)
+        Health -= damage;
+        Debug.Log(Health);
+        if (Health <= 0)
         {
-            health = 0;
+            Health = 0;
             Death();
         }
     }

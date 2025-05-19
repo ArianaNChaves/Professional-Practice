@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class Enemy : BaseEnemy
 {
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         EnemyRigidbody = GetComponent<Rigidbody>();
         ChangeState(State.Idle);
     }
@@ -72,13 +73,13 @@ public class Enemy : BaseEnemy
         while (CurrentState == State.Moving)
         {
             enemyAnimation.WalkingAnimation();
-            if (Distance <= attackRange)
+            if (Distance <= AttackRange)
             {
                 IsInRange = true;
                 ChangeState(State.Attacking);
             }
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
-            Vector3 newVelocity = TargetDirection * moveSpeed;
+            Vector3 newVelocity = TargetDirection * MoveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
             
             yield return new WaitForFixedUpdate();
@@ -102,15 +103,15 @@ public class Enemy : BaseEnemy
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
-            if (Distance > attackRange)
+            if (Distance > AttackRange)
             {
                 IsInRange = false;
                 ChangeState(State.Moving);
             }
             EnemyRigidbody.velocity = Vector3.zero;
             enemyAnimation.AttackingAnimation();
-            targetDamageable?.TakeDamage(damage);
-            yield return new WaitForSeconds(attackRate);
+            targetDamageable?.TakeDamage(Damage);
+            yield return new WaitForSeconds(AttackRate);
             yield return new WaitForFixedUpdate();
         }
     }
