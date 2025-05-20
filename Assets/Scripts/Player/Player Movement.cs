@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform playerVisual;
+    [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private PlayerSO playerData;
     [SerializeField] private float rotationSpeed = 10f;
     
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.MovePosition(newPosition);
         
     }
-
+    
     private void Rotation(Vector3 direction)
     {
         Quaternion newRotation = Quaternion.LookRotation(direction);

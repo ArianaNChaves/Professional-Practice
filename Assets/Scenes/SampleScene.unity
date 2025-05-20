@@ -478,7 +478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39028654, y: 0.000000020136913, z: -0.000000008536138, w: 0.92069346}
+  m_LocalRotation: {x: 0.3902865, y: 0.000000027320008, z: -0.000000011581087, w: 0.92069346}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -603,7 +603,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &1059901838
 MonoBehaviour:
@@ -1116,8 +1116,12 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5756474805168235023, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 6085065543427463547, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1293,7 +1297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087232508}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39028654, y: 0.000000020136913, z: -0.000000008536138, w: 0.92069346}
+  m_LocalRotation: {x: 0.3902865, y: 0.000000027320008, z: -0.000000011581087, w: 0.92069346}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
