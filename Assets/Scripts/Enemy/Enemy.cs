@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Enemy : BaseEnemy
 {
+    public static event Action OnEnemyDeath;
+
     protected override void Awake()
     {
         base.Awake();
@@ -56,7 +58,7 @@ public class Enemy : BaseEnemy
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.useGravity = false;
         EnemyRigidbody.AddForce(Vector3.up * 8, ForceMode.Impulse);
-        // EnemyRigidbody.velocity = Vector3.zero;
+        OnEnemyDeath?.Invoke();
         Invoke(nameof(DisableAfterSeconds), 5f);
     }
 
