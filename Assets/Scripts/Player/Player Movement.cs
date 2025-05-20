@@ -52,7 +52,11 @@ public class PlayerMovement : MonoBehaviour
         Rotation(direction);
         
         Vector3 newPosition = _rigidbody.position + direction * (_speed * Time.fixedDeltaTime);
-        _rigidbody.MovePosition(newPosition);
+        float moveDistance = Vector3.Distance(_rigidbody.position, newPosition);
+        if (!Physics.Raycast(_rigidbody.position, direction, moveDistance, obstacleMask))
+        {
+            _rigidbody.MovePosition(newPosition);
+        }
         
     }
     

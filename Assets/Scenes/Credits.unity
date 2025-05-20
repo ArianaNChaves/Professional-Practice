@@ -1320,8 +1320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f531029082c7e345833f6cb30b9adf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playSceneName: SampleScene
-  creditsSceneName: Art Scene
+  playSceneName: Game
+  creditsSceneName: Credits
   mainMenuSceneName: Main Menu
 --- !u!4 &1727402533
 Transform:
