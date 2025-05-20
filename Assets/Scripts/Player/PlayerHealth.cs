@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    private UnityEvent OnDeath;
+    public UnityEvent OnDeath;
     [SerializeField] private PlayerSO playerData;
     
     private float _health;

@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //todo Cambiarlo a un scriptable object con los settings del movimiento del player
     [SerializeField] private Transform playerVisual;
     [SerializeField] private PlayerSO playerData;
     [SerializeField] private float rotationSpeed = 10f;
