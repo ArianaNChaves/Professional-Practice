@@ -38,7 +38,7 @@ public class GameCondition : MonoBehaviour
     private void OnPlayerHealthChanged(float health)
     {
         Debug.Log(health);
-        playerHealthText.text = health.ToString("F1");
+        playerHealthText.text = Mathf.RoundToInt(health).ToString();
     }
 
     private void LoseGame()
