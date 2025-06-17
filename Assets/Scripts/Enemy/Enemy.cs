@@ -103,12 +103,12 @@ public class Enemy : BaseEnemy
     {
         EnemyRigidbody.drag = QuietDrag;
         
-        // IDamageable targetDamageable = target.GetComponent<IDamageable>();
-        // if (targetDamageable == null || !target)
-        // {
-        //     ChangeState(State.Idle);
-        //     yield return null;
-        // }
+        IDamageable targetDamageable = target.GetComponent<IDamageable>();
+        if (targetDamageable == null || !target)
+        {
+            ChangeState(State.Idle);
+            yield return null;
+        }
         while (CurrentState == State.Attacking && IsInRange)
         {
             if (Distance > AttackRange)
@@ -117,14 +117,8 @@ public class Enemy : BaseEnemy
                 ChangeState(State.Moving);
             }
             EnemyRigidbody.velocity = Vector3.zero;
-            
-            
-            
-            
-            
-            
             enemyAnimation.AttackingAnimation();
-            // targetDamageable?.TakeDamage(Damage);
+            targetDamageable?.TakeDamage(Damage);
             yield return new WaitForSeconds(AttackRate);
             yield return new WaitForFixedUpdate();
         }
