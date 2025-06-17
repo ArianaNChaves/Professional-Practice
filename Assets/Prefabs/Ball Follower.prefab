@@ -84,8 +84,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
+  m_Constraints: 36
+  m_CollisionDetection: 1
 --- !u!114 &2700202979325616269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 512
-  collisionRange: 2.1
+  collisionRange: 3.13
   playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
 --- !u!145 &2183855765879030096
 SpringJoint:
@@ -116,11 +116,11 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 35
+  m_Spring: 90
   m_Damper: 1
-  m_MinDistance: 2
+  m_MinDistance: 1
   m_MaxDistance: 6
-  m_Tolerance: 0.025
+  m_Tolerance: 0.001
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0

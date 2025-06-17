@@ -79,7 +79,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2560
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   playerVisual: {fileID: 5942842773832737215}
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 2560
   playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
   rotationSpeed: 10
   animator: {fileID: 6516058509164554308}
