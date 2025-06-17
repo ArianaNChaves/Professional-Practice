@@ -55,6 +55,7 @@ public class Enemy : BaseEnemy
     protected override void Death()
     {
         StopAllCoroutines();
+        EnemyRigidbody.mass = BaseMass;
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.useGravity = false;
         EnemyRigidbody.AddForce(Vector3.up * 8, ForceMode.Impulse);
@@ -69,6 +70,10 @@ public class Enemy : BaseEnemy
     
     protected override IEnumerator Moving()
     {
+
+        EnemyRigidbody.drag = BaseDrag;
+        
+        
         Vector3 initialVelocity = Vector3.zero;
         if (!target) yield return null;
         while (CurrentState == State.Moving)
@@ -96,12 +101,14 @@ public class Enemy : BaseEnemy
 
     protected override IEnumerator Attacking()
     {
-        IDamageable targetDamageable = target.GetComponent<IDamageable>();
-        if (targetDamageable == null || !target)
-        {
-            ChangeState(State.Idle);
-            yield return null;
-        }
+        EnemyRigidbody.drag = QuietDrag;
+        
+        // IDamageable targetDamageable = target.GetComponent<IDamageable>();
+        // if (targetDamageable == null || !target)
+        // {
+        //     ChangeState(State.Idle);
+        //     yield return null;
+        // }
         while (CurrentState == State.Attacking && IsInRange)
         {
             if (Distance > AttackRange)
@@ -110,8 +117,14 @@ public class Enemy : BaseEnemy
                 ChangeState(State.Moving);
             }
             EnemyRigidbody.velocity = Vector3.zero;
+            
+            
+            
+            
+            
+            
             enemyAnimation.AttackingAnimation();
-            targetDamageable?.TakeDamage(Damage);
+            // targetDamageable?.TakeDamage(Damage);
             yield return new WaitForSeconds(AttackRate);
             yield return new WaitForFixedUpdate();
         }

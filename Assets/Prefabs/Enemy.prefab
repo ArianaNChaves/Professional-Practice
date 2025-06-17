@@ -106,10 +106,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1.53
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.57, z: 0}
 --- !u!54 &3891600771281781283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,15 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d19803fe95e6f4db8fc5e6d2831f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
-  damage: 2
-  attackRange: 3
-  attackRate: 2
-  moveSpeed: 5
   startingWaitTime: 2
   rotationSpeed: 4
   target: {fileID: 0}
   enemyAnimation: {fileID: 2506574263434907556}
+  enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
 --- !u!1001 &6937370272934974856
 PrefabInstance:
   m_ObjectHideFlags: 0

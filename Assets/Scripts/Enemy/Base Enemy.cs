@@ -20,6 +20,10 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     protected Rigidbody EnemyRigidbody;
     protected float Distance;
     protected bool IsInRange;
+    //Physics Settings
+    protected const float BaseDrag = 1;
+    protected const float QuietDrag = 100;
+    protected const float BaseMass = 1;
     protected enum State
     {
         Idle,
@@ -45,6 +49,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Taking Damage");
         Health -= damage;
         if (Health <= 0)
         {

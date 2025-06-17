@@ -798,6 +798,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5756474805168235023, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 6085065543427463547, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 2560
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -998,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2619939762699222484, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.09
+      value: 20.47
       objectReference: {fileID: 0}
     - target: {fileID: 2619939762699222484, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1034,32 +1042,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3891600771281781283, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_Mass
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891600771281781283, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891600771281781283, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4671142383101091916, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4671142383101091916, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 342644717}
-    - target: {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
-      propertyPath: enemyData
-      value: 
-      objectReference: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1082,24 +1074,36 @@ PrefabInstance:
       value: Ball Follower
       objectReference: {fileID: 0}
     - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
-      propertyPath: m_Damper
-      value: 1
+      propertyPath: m_Spring
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: m_Tolerance
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: m_MaxDistance
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
       propertyPath: m_MinDistance
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 342644722}
-    - target: {fileID: 4071635892949076492, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
-      propertyPath: m_Drag
-      value: 0.2
+    - target: {fileID: 2700202979325616269, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: collisionRange
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 4071635892949076492, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.5
+      propertyPath: m_Constraints
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071635892949076492, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6499409264121481006, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1141,10 +1145,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7259124376575934224, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: a513c477041391a46b636bf247a71582, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
