@@ -7147,6 +7147,14 @@ PrefabInstance:
       value: Ball Follower
       objectReference: {fileID: 0}
     - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: m_Spring
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: m_MaxDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183855765879030096, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 1333888929}
