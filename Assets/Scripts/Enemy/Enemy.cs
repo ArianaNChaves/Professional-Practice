@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class Enemy : BaseEnemy
 {
+    [SerializeField] private float deathForce;
+    [SerializeField] private float timeToDespawn;
     public static event Action OnEnemyDeath;
+    private Collider _collider;
 
     protected override void Awake()
     {
         base.Awake();
         EnemyRigidbody = GetComponent<Rigidbody>();
+        _collider = GetComponent<Collider>();
         ChangeState(State.Idle);
     }
 
@@ -55,12 +59,13 @@ public class Enemy : BaseEnemy
     protected override void Death()
     {
         StopAllCoroutines();
+        _collider.enabled = false;
         EnemyRigidbody.mass = BaseMass;
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.useGravity = false;
-        EnemyRigidbody.AddForce(Vector3.up * 8, ForceMode.Impulse);
+        EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         OnEnemyDeath?.Invoke();
-        Invoke(nameof(DisableAfterSeconds), 5f);
+        Invoke(nameof(DisableAfterSeconds), timeToDespawn);
     }
 
     private void DisableAfterSeconds()
