@@ -50,35 +50,33 @@ public class Enemy : BaseEnemy
                 StartCoroutine(Attacking());
                 break;
             }
+            case State.Death:
+            {
+                StartCoroutine(Death());
+                break;
+            }
             default:
-                Debug.LogError($"Enemy.cs - ChangeState: State {newState} no existe");
+                throw new NotImplementedException("Enemy State no implementado");
                 break;
         }
     }
 
-    protected override void Death()
+    protected override IEnumerator Death()
     {
-        StopAllCoroutines();
         _collider.enabled = false;
         EnemyRigidbody.mass = BaseMass;
-        enemyAnimation.DeathAnimation();
         EnemyRigidbody.useGravity = false;
         EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
+        enemyAnimation.DeathAnimation();
         OnEnemyDeath?.Invoke();
-        Invoke(nameof(DisableAfterSeconds), timeToDespawn);
-    }
-
-    private void DisableAfterSeconds()
-    {
+        yield return new WaitForSeconds(timeToDespawn);
         gameObject.SetActive(false);
+
     }
     
     protected override IEnumerator Moving()
     {
-
         EnemyRigidbody.drag = BaseDrag;
-        
-        
         Vector3 initialVelocity = Vector3.zero;
         if (!target) yield return null;
         while (CurrentState == State.Moving)

@@ -28,7 +28,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     {
         Idle,
         Moving,
-        Attacking
+        Attacking,
+        Death,
     }
 
     protected virtual void Awake()
@@ -54,11 +55,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         if (Health <= 0)
         {
             Health = 0;
-            Death();
+            ChangeState(State.Death);
         }
     }
 
-    protected abstract void Death();
+    protected abstract IEnumerator Death();
 
     public void SetTarget(GameObject newTarget)
     {
