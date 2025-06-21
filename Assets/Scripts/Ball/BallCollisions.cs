@@ -6,7 +6,7 @@ using UnityEngine;
 public class BallCollisions : MonoBehaviour
 {
     [SerializeField] private LayerMask collisionMask;
-    [SerializeField, Range(1f, 11f)] private float collisionRange;
+    [SerializeField, Range(10f, 100f)] private float collisionRange;
     [SerializeField] private PlayerSO playerData;
     private float _damage;
     
@@ -17,19 +17,18 @@ public class BallCollisions : MonoBehaviour
         _damage = playerData.Damage;
     }
 
+    private void Update()
+    {
+        Debug.Log($"Ball velocity: {_rigidbody.velocity.magnitude}");
+    }
+
     private void OnCollisionEnter(Collision other)
     {
-
-        if (Utilities.CompareLayerAndMask(collisionMask, other.gameObject.layer))
+        if (!Utilities.CompareLayerAndMask(collisionMask, other.gameObject.layer)) return;
+        if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
+        if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            if (_rigidbody.velocity.magnitude >= collisionRange)
-            {
-                if (other.gameObject.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.TakeDamage(_damage); 
-                }
-                
-            }
+            damageable.TakeDamage(_damage); 
         }
     }
 }

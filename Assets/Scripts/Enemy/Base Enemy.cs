@@ -24,6 +24,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     protected const float BaseDrag = 1;
     protected const float QuietDrag = 100;
     protected const float BaseMass = 1;
+    protected State CurrentState;
     protected enum State
     {
         Idle,
@@ -40,8 +41,12 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         Damage = enemyData.Damage;
         Health = enemyData.MaxHealth;
     }
-    
-    protected State CurrentState;
+
+    protected virtual void WaitForTarget()
+    {
+        if (target) return;
+        CurrentState = State.Idle;
+    }
     
     protected virtual void ChangeState(State newState)
     {
@@ -50,7 +55,6 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Taking Damage");
         Health -= damage;
         if (Health <= 0)
         {

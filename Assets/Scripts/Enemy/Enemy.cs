@@ -10,6 +10,7 @@ public class Enemy : BaseEnemy
     [SerializeField] private float timeToDespawn;
     public static event Action OnEnemyDeath;
     private Collider _collider;
+    private IDamageable _targetDamageable;
 
     protected override void Awake()
     {
@@ -18,16 +19,7 @@ public class Enemy : BaseEnemy
         _collider = GetComponent<Collider>();
         ChangeState(State.Idle);
     }
-
-    private void Update()
-    {
-        CheckDistance();
-    }
-
-    private void FixedUpdate()
-    {
-        FaceTarget();
-    }
+    
     
     protected override void ChangeState(State newState)
     {
@@ -57,7 +49,6 @@ public class Enemy : BaseEnemy
             }
             default:
                 throw new NotImplementedException("Enemy State no implementado");
-                break;
         }
     }
 
@@ -65,6 +56,7 @@ public class Enemy : BaseEnemy
     {
         EnemyRigidbody.useGravity = false;
         _collider.enabled = false;
+        EnemyRigidbody.drag = BaseDrag;
         EnemyRigidbody.mass = BaseMass;
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
@@ -78,9 +70,15 @@ public class Enemy : BaseEnemy
     {
         EnemyRigidbody.drag = BaseDrag;
         Vector3 initialVelocity = Vector3.zero;
-        if (!target) yield return null;
+        if (!target)
+        {
+            ChangeState(State.Idle);
+            yield return null;
+        }
         while (CurrentState == State.Moving)
         {
+            CheckDistance();
+            FaceTarget();
             enemyAnimation.WalkingAnimation();
             if (Distance <= AttackRange)
             {
@@ -90,30 +88,36 @@ public class Enemy : BaseEnemy
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * MoveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
-            
             yield return new WaitForFixedUpdate();
         }
     }
     
     protected override IEnumerator Idling()
     {
+        EnemyRigidbody.drag = QuietDrag;
+        Vector3 initialVelocity = Vector3.zero;
         enemyAnimation.IdlingAnimation();
+        if (target)
+        {
+            _targetDamageable = target.GetComponent<IDamageable>();
+            FaceTarget();
+            ChangeState(State.Moving);  
+        }
         yield return new WaitForSeconds(startingWaitTime);
-        ChangeState(State.Moving);
     }
-
+    
     protected override IEnumerator Attacking()
     {
         EnemyRigidbody.drag = QuietDrag;
-        
-        IDamageable targetDamageable = target.GetComponent<IDamageable>();
-        if (targetDamageable == null || !target)
+        if (_targetDamageable == null || !target)
         {
             ChangeState(State.Idle);
             yield return null;
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
+            CheckDistance();
+            FaceTarget();
             if (Distance > AttackRange)
             {
                 IsInRange = false;
@@ -121,7 +125,7 @@ public class Enemy : BaseEnemy
             }
             EnemyRigidbody.velocity = Vector3.zero;
             enemyAnimation.AttackingAnimation();
-            targetDamageable?.TakeDamage(Damage);
+            _targetDamageable?.TakeDamage(Damage);
             yield return new WaitForSeconds(AttackRate);
             yield return new WaitForFixedUpdate();
         }

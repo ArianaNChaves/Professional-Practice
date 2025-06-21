@@ -17,7 +17,7 @@ public class EnemyAnimation : MonoBehaviour
     }
     public void IdlingAnimation()
     {
-        animator.CrossFade("idle", 0f);
+        animator.Play("idle");
     }
     public void DeathAnimation()
     {
