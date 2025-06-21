@@ -98,9 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d549f7f9b15497542a7c1ae99418d622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionMask:
+  enemyMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
   collisionRange: 24
   playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
 --- !u!145 &2183855765879030096
@@ -148,7 +151,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84ff22cc39963784d9fc11c5c4c6626b, type: 2}
+  - {fileID: 2100000, guid: 079b3134027b9c04abf7145ce8e73d74, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
