@@ -16,18 +16,15 @@ public class BallCollisions : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _damage = playerData.Damage;
     }
-
-    private void Update()
-    {
-        Debug.Log($"Ball velocity: {_rigidbody.velocity.magnitude}");
-    }
-
+    
     private void OnCollisionEnter(Collision other)
     {
         if (!Utilities.CompareLayerAndMask(collisionMask, other.gameObject.layer)) return;
         if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
+            Debug.Log($"Ball velocity: {_rigidbody.velocity.magnitude}");
+
             damageable.TakeDamage(_damage); 
         }
     }
