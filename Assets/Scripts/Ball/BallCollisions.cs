@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class BallCollisions : MonoBehaviour
 {
-    [SerializeField] private LayerMask collisionMask;
+    public static event Action OnBallCrash;
+    
+    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private LayerMask obstacleMask;
     [SerializeField, Range(10f, 100f)] private float collisionRange;
     [SerializeField] private PlayerSO playerData;
     private float _damage;
+    private const float BallSpeed = 10f;
     
     Rigidbody _rigidbody;
     private void Awake()
@@ -19,7 +23,17 @@ public class BallCollisions : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (!Utilities.CompareLayerAndMask(collisionMask, other.gameObject.layer)) return;
+        //obstacle
+        if (Utilities.CompareLayerAndMask(obstacleMask, other.gameObject.layer))
+        {
+            if (_rigidbody.velocity.magnitude >= BallSpeed)
+            {
+                OnBallCrash?.Invoke();
+            }
+        }
+        
+        //Enemy
+        if (!Utilities.CompareLayerAndMask(enemyMask, other.gameObject.layer)) return;
         if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {

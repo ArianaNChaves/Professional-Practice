@@ -124,6 +124,14 @@ PrefabInstance:
       propertyPath: collisionRange
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 2700202979325616269, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: enemyMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 2700202979325616269, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 6499409264121481006, guid: 3291989cdbf3bb44eb452634ca4c4790, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
