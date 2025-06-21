@@ -63,11 +63,11 @@ public class Enemy : BaseEnemy
 
     protected override IEnumerator Death()
     {
+        EnemyRigidbody.useGravity = false;
         _collider.enabled = false;
         EnemyRigidbody.mass = BaseMass;
-        EnemyRigidbody.useGravity = false;
-        EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         enemyAnimation.DeathAnimation();
+        EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         OnEnemyDeath?.Invoke();
         yield return new WaitForSeconds(timeToDespawn);
         gameObject.SetActive(false);
