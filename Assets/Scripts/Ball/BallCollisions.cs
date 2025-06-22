@@ -6,6 +6,7 @@ using UnityEngine;
 public class BallCollisions : MonoBehaviour
 {
     public static event Action OnBallCrash;
+    public static event Action<Vector3> OnBallWallCrash;
     
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private LayerMask obstacleMask;
@@ -29,6 +30,7 @@ public class BallCollisions : MonoBehaviour
             if (_rigidbody.velocity.magnitude >= BallSpeed)
             {
                 OnBallCrash?.Invoke();
+                OnBallWallCrash?.Invoke(transform.position);
             }
         }
         

@@ -18,7 +18,7 @@ TagManager:
   - Collectable
   - Obstacle
   - Camera Ignore
-  - 
+  - Shader
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Crash Shader
+    uniqueID: 4031988435
     locked: 0
