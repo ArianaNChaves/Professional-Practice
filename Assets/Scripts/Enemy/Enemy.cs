@@ -97,13 +97,13 @@ public class Enemy : BaseEnemy
         EnemyRigidbody.drag = QuietDrag;
         Vector3 initialVelocity = Vector3.zero;
         enemyAnimation.IdlingAnimation();
+        yield return new WaitForSeconds(startingWaitTime);
         if (target)
         {
             _targetDamageable = target.GetComponent<IDamageable>();
             FaceTarget();
             ChangeState(State.Moving);  
         }
-        yield return new WaitForSeconds(startingWaitTime);
     }
     
     protected override IEnumerator Attacking()
