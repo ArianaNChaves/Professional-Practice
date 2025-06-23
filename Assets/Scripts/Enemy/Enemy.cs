@@ -100,17 +100,16 @@ public class Enemy : BaseEnemy
         }
         while (CurrentState == State.Moving)
         {
-            Distance = Vector3.Distance(transform.position, target.transform.position);
             FaceTarget();
             enemyAnimation.WalkingAnimation();
-            if (Distance <= AttackRange && _isPlayer)
+            if (ReachTarget() && _isPlayer)
             {
                 IsInRange = true;
                 ChangeState(State.Attacking);
             }
-            if (Distance <= 0.1f && !_isPlayer)
+            if (ReachTarget() && !_isPlayer)
             {
-                CheckTargets();
+                ChangeState(State.Idle);
             }
             
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
@@ -140,14 +139,14 @@ public class Enemy : BaseEnemy
     protected override IEnumerator Attacking()
     {
         EnemyRigidbody.drag = QuietDrag;
-        if (_targetDamageable == null || !target)
+        if (_targetDamageable == null || !player)
         {
             ChangeState(State.Idle);
             yield return null;
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
-            Distance = Vector3.Distance(transform.position, target.transform.position);
+            Distance = Vector3.Distance(transform.position, player.transform.position);
             FaceTarget();
             if (Distance > AttackRange)
             {
@@ -179,14 +178,25 @@ public class Enemy : BaseEnemy
     }
     private void CheckTargets()
     {
-        Debug.Log("ENEMYT Targets: " + _targetsList.Count);
-
         if (_targetsList.Count > 0)
         {
             target = _targetsList[0];
-            _targetsList.RemoveAt(0);
-            _isPlayer = Utilities.CompareLayerAndMask(playerLayer, target.layer);
+            if (!_isPlayer)
+            {
+                _targetsList.RemoveAt(0);
+            }
+            else
+            {
+                player = target;
+            }
         }
+        Debug.Log("ENEMYT Targets: " + _targetsList.Count + " Target: " + target);
+    }
+
+    private bool ReachTarget()
+    {
+        _isPlayer = Utilities.CompareLayerAndMask(playerLayer, target.layer);
+        return Vector3.Distance(transform.position, target.transform.position) < AttackRange;
     }
 
 }

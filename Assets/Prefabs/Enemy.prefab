@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d19803fe95e6f4db8fc5e6d2831f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWaitTime: 2
+  startingWaitTime: 0.5
   rotationSpeed: 4
   target: {fileID: 0}
   enemyAnimation: {fileID: 2506574263434907556}
