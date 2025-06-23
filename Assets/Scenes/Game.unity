@@ -1015,7 +1015,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: :D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc3746351ec7ab341a804f6243872951, type: 2}
   m_sharedMaterial: {fileID: 8939524137564187045, guid: bc3746351ec7ab341a804f6243872951, type: 2}
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Grandpa will be caught in
+  m_text: Aca iria mi UI si tuviera una
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc3746351ec7ab341a804f6243872951, type: 2}
   m_sharedMaterial: {fileID: 8939524137564187045, guid: bc3746351ec7ab341a804f6243872951, type: 2}
@@ -11287,7 +11287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46480036, y: 0.057334285, z: -0.030178636, w: 0.88304174}
+  m_LocalRotation: {x: 0.46480036, y: 0.05733432, z: -0.030178657, w: 0.88304174}
   m_LocalPosition: {x: -2.2864494, y: 17.44586, z: -10.296359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14028,11 +14028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.057334285
+      value: 0.05733432
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.030178636
+      value: -0.030178657
       objectReference: {fileID: 0}
     - target: {fileID: 6792139295941315829, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalPosition.x
