@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class BaseEnemy : MonoBehaviour, IDamageable
+public abstract class BaseEnemy : MonoBehaviour, IDamageable, IPooleable
 {
     [SerializeField] protected float startingWaitTime;
     [SerializeField] protected float rotationSpeed;
     [SerializeField] protected GameObject target;
     [SerializeField] protected EnemyAnimation enemyAnimation;
     [SerializeField] protected EnemySO enemyData;
+    [SerializeField] protected LayerMask playerLayer;
     
     protected float MoveSpeed;
     protected float Health;
@@ -23,9 +25,10 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     //Physics Settings
     protected const float BaseDrag = 1;
     protected const float QuietDrag = 100;
-    protected const float BaseMass = 1;
+    protected const float DeathMass = 1;
+    protected const float NormalMass = 100;
     protected State CurrentState;
-    protected enum State
+    public enum State
     {
         Idle,
         Moving,
@@ -42,7 +45,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
         Health = enemyData.MaxHealth;
     }
 
-    protected virtual void WaitForTarget()
+    public virtual void ChangeTarget()
     {
         if (target) return;
         CurrentState = State.Idle;
@@ -64,13 +67,11 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable
     }
 
     protected abstract IEnumerator Death();
-
-    public void SetTarget(GameObject newTarget)
-    {
-        this.target = newTarget;
-    }
-
     protected abstract IEnumerator Moving();
     protected abstract IEnumerator Idling();
     protected abstract IEnumerator Attacking();
+    public void ReturnObjectToPool()
+    {
+        PoolManager.Instance.ReturnToPool(this);
+    }
 }

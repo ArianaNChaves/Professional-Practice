@@ -6,20 +6,43 @@ using UnityEngine;
 
 public class Enemy : BaseEnemy
 {
+    public static event Action OnEnemyDeath;
+    public static event Action<Enemy> OnSpawn;
     [SerializeField] private float deathForce;
     [SerializeField] private float timeToDespawn;
-    public static event Action OnEnemyDeath;
+    [SerializeField] private bool isInScene = false;
+    [SerializeField] private GameObject player;
+    
     private Collider _collider;
     private IDamageable _targetDamageable;
+    private bool _isPlayer = false;
+    private List<GameObject> _targetsList;
 
     protected override void Awake()
     {
         base.Awake();
         EnemyRigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
-        ChangeState(State.Idle);
+        _targetsList = new List<GameObject>();
+    }
+
+    private void Start()
+    {
+        if (isInScene)
+        {
+            Activate();
+        }
     }
     
+
+    public void Activate()
+    {
+        EnemyRigidbody.useGravity = true;
+        _collider.enabled = true;
+        EnemyRigidbody.mass = NormalMass;
+        OnSpawn?.Invoke(this);
+        ChangeState(State.Idle);
+    }
     
     protected override void ChangeState(State newState)
     {
@@ -39,6 +62,7 @@ public class Enemy : BaseEnemy
             }
             case State.Attacking:
             {
+                _targetDamageable = target.GetComponent<IDamageable>();
                 StartCoroutine(Attacking());
                 break;
             }
@@ -57,13 +81,12 @@ public class Enemy : BaseEnemy
         EnemyRigidbody.useGravity = false;
         _collider.enabled = false;
         EnemyRigidbody.drag = BaseDrag;
-        EnemyRigidbody.mass = BaseMass;
+        EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         OnEnemyDeath?.Invoke();
         yield return new WaitForSeconds(timeToDespawn);
-        gameObject.SetActive(false);
-
+        ReturnObjectToPool();
     }
     
     protected override IEnumerator Moving()
@@ -77,14 +100,19 @@ public class Enemy : BaseEnemy
         }
         while (CurrentState == State.Moving)
         {
-            CheckDistance();
+            Distance = Vector3.Distance(transform.position, target.transform.position);
             FaceTarget();
             enemyAnimation.WalkingAnimation();
-            if (Distance <= AttackRange)
+            if (Distance <= AttackRange && _isPlayer)
             {
                 IsInRange = true;
                 ChangeState(State.Attacking);
             }
+            if (Distance <= 0.1f && !_isPlayer)
+            {
+                CheckTargets();
+            }
+            
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * MoveSpeed;
             EnemyRigidbody.velocity = Vector3.SmoothDamp(EnemyRigidbody.velocity, newVelocity, ref initialVelocity, 0.1f);
@@ -95,12 +123,15 @@ public class Enemy : BaseEnemy
     protected override IEnumerator Idling()
     {
         EnemyRigidbody.drag = QuietDrag;
-        Vector3 initialVelocity = Vector3.zero;
         enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
+        CheckTargets();
+        if (isInScene)
+        {
+            target = player;
+        }
         if (target)
         {
-            _targetDamageable = target.GetComponent<IDamageable>();
             FaceTarget();
             ChangeState(State.Moving);  
         }
@@ -116,7 +147,7 @@ public class Enemy : BaseEnemy
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
-            CheckDistance();
+            Distance = Vector3.Distance(transform.position, target.transform.position);
             FaceTarget();
             if (Distance > AttackRange)
             {
@@ -140,9 +171,22 @@ public class Enemy : BaseEnemy
         Quaternion newRotation = Quaternion.LookRotation(newDirection);
         EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
     }
-
-    private void CheckDistance()
+    
+    public void SetTargetList(GameObject[] newTarget)
     {
-        Distance = Vector3.Distance(transform.position, target.transform.position);
+        _targetsList.Clear();
+        _targetsList.AddRange(newTarget);
     }
+    private void CheckTargets()
+    {
+        Debug.Log("ENEMYT Targets: " + _targetsList.Count);
+
+        if (_targetsList.Count > 0)
+        {
+            target = _targetsList[0];
+            _targetsList.RemoveAt(0);
+            _isPlayer = Utilities.CompareLayerAndMask(playerLayer, target.layer);
+        }
+    }
+
 }

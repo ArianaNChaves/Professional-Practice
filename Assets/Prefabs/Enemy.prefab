@@ -263,8 +263,13 @@ MonoBehaviour:
   target: {fileID: 0}
   enemyAnimation: {fileID: 2506574263434907556}
   enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
   deathForce: 25
   timeToDespawn: 2
+  isInScene: 0
+  player: {fileID: 0}
 --- !u!1 &5222406254354917404
 GameObject:
   m_ObjectHideFlags: 0
