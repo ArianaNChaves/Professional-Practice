@@ -14005,7 +14005,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39028654, y: -0.000000020136913, z: 0.000000008536138, w: 0.92069346}
+  m_LocalRotation: {x: 0.3902865, y: -0.000000027320008, z: 0.000000011581087, w: 0.92069346}
   m_LocalPosition: {x: 0, y: 19.68, z: -18.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21686,15 +21686,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.39028654
+      value: 0.3902865
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000020136913
+      value: -0.000000027320008
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000008536138
+      value: 0.000000011581087
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: crashShader
@@ -21756,8 +21756,8 @@ SceneRoots:
   - {fileID: 1474195815}
   - {fileID: 454641361}
   - {fileID: 1671923544}
+  - {fileID: 1822795262}
   - {fileID: 502256336}
   - {fileID: 1288277989}
   - {fileID: 2118744000}
   - {fileID: 2107626934}
-  - {fileID: 1822795262}
