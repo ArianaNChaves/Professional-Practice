@@ -26,8 +26,8 @@ public class ShaderAppear : MonoBehaviour
     private void PlayShader(Vector3 position)
     {
         transform.position = position;
-        
+       
         _visualEffect.Play();
-        
+       
     }
 }
