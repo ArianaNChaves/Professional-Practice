@@ -20,6 +20,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable, IPooleable
     protected float AttackRate;
     protected Vector3 TargetDirection;
     protected Rigidbody EnemyRigidbody;
+    protected Coroutine StateRoutine;
     protected float Distance;
     protected bool IsInRange;
     //Physics Settings
@@ -56,22 +57,14 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable, IPooleable
         CurrentState = newState;
     }
 
-    public void TakeDamage(float damage)
-    {
-        Health -= damage;
-        if (Health <= 0)
-        {
-            Health = 0;
-            ChangeState(State.Death);
-        }
-    }
+    public abstract void TakeDamage(float damage);
+
 
     protected abstract IEnumerator Death();
     protected abstract IEnumerator Moving();
     protected abstract IEnumerator Idling();
     protected abstract IEnumerator Attacking();
-    public void ReturnObjectToPool()
-    {
-        PoolManager.Instance.ReturnToPool(this);
-    }
+
+    public abstract void ReturnObjectToPool();
+
 }

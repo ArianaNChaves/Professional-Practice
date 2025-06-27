@@ -21,6 +21,7 @@ public class EnemyManager : MonoBehaviour
 
     private void EnemySpawn(Enemy newEnemy)
     {
+        _enemiesSpawned++;
         if (targets.Length > 0)
         {
             newEnemy.SetTargetList(targets); 

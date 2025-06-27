@@ -6,9 +6,10 @@ using UnityEngine;
 public class PrefabsManager : MonoBehaviour
 {
     [SerializeField] private Enemy normalEnemyPrefab;
+    [SerializeField] private int normalEnemyPrefabSize;
     void Start()
     {
-        PoolManager.Instance.InitializePool(normalEnemyPrefab, 30);
+        PoolManager.Instance.InitializePool(normalEnemyPrefab, normalEnemyPrefabSize);
     }
 
 

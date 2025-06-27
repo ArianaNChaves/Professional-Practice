@@ -5,6 +5,7 @@ using System.Linq; // Needed for Any() check
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemySO enemyData;
+    [SerializeField] private Transform spawnPoint;
     private Vector2 _spawnRate;
     private float _spawnTimer;
     
@@ -47,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
         newEnemy.transform.position = transform.position;
         newEnemy.transform.rotation = transform.rotation;
         newEnemy.gameObject.SetActive(true);
+        newEnemy.SetSpawnPoint(spawnPoint);
         newEnemy.Activate();
     }
 }

@@ -30,56 +30,29 @@ public class Enemy : BaseEnemy
     {
         if (isInScene)
         {
-            Activate();
+            ChangeState(State.Idle);
         }
     }
     
 
     public void Activate()
     {
+        Health = enemyData.MaxHealth;
+        EnemyRigidbody.velocity = Vector3.zero;
         EnemyRigidbody.useGravity = true;
         _collider.enabled = true;
         EnemyRigidbody.mass = NormalMass;
-        OnSpawn?.Invoke(this);
+        EnemyRigidbody.drag = QuietDrag;
         ChangeState(State.Idle);
+        OnSpawn?.Invoke(this);
     }
     
-    protected override void ChangeState(State newState)
-    {
-        StopAllCoroutines();
-        CurrentState = newState;
-        switch (CurrentState)
-        {
-            case State.Idle:
-            {
-                StartCoroutine(Idling());
-                break;
-            }
-            case State.Moving:
-            {
-                StartCoroutine(Moving());
-                break;
-            }
-            case State.Attacking:
-            {
-                _targetDamageable = target.GetComponent<IDamageable>();
-                StartCoroutine(Attacking());
-                break;
-            }
-            case State.Death:
-            {
-                StartCoroutine(Death());
-                break;
-            }
-            default:
-                throw new NotImplementedException("Enemy State no implementado");
-        }
-    }
-
     protected override IEnumerator Death()
     {
         EnemyRigidbody.useGravity = false;
+        isInScene = false;
         _collider.enabled = false;
+        _targetsList.Clear();
         EnemyRigidbody.drag = BaseDrag;
         EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
@@ -89,14 +62,58 @@ public class Enemy : BaseEnemy
         ReturnObjectToPool();
     }
     
+    protected override void ChangeState(State newState)
+    {
+        if (StateRoutine != null)
+        {
+            StopCoroutine(StateRoutine); 
+        }
+                
+        CurrentState = newState;
+        switch (CurrentState)
+        {
+            case State.Idle:
+            {
+                EnemyRigidbody.drag = QuietDrag;
+                StateRoutine = StartCoroutine(Idling());
+                break;
+            }
+            case State.Moving:
+            {
+                EnemyRigidbody.drag = BaseDrag;
+                StateRoutine = StartCoroutine(Moving());
+                break;
+            }
+            case State.Attacking:
+            {
+                EnemyRigidbody.drag = QuietDrag;
+                _targetDamageable = target.GetComponent<IDamageable>();
+                StateRoutine = StartCoroutine(Attacking());
+                break;
+            }
+            case State.Death:
+            {
+                StateRoutine = StartCoroutine(Death());
+                break;
+            }
+            default:
+                throw new NotImplementedException("Enemy State no implementado");
+        }
+    }
+    
+    public override void ReturnObjectToPool()
+    {
+        StopAllCoroutines();
+        PoolManager.Instance.ReturnToPool(this);
+    }
+
     protected override IEnumerator Moving()
     {
-        EnemyRigidbody.drag = BaseDrag;
         Vector3 initialVelocity = Vector3.zero;
         if (!target)
         {
-            ChangeState(State.Idle);
             yield return null;
+            ChangeState(State.Idle);
         }
         while (CurrentState == State.Moving)
         {
@@ -105,10 +122,12 @@ public class Enemy : BaseEnemy
             if (ReachTarget() && _isPlayer)
             {
                 IsInRange = true;
+                yield return null;
                 ChangeState(State.Attacking);
             }
             if (ReachTarget() && !_isPlayer)
             {
+                yield return null;
                 ChangeState(State.Idle);
             }
             
@@ -121,7 +140,6 @@ public class Enemy : BaseEnemy
     
     protected override IEnumerator Idling()
     {
-        EnemyRigidbody.drag = QuietDrag;
         enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
         CheckTargets();
@@ -132,17 +150,17 @@ public class Enemy : BaseEnemy
         if (target)
         {
             FaceTarget();
-            ChangeState(State.Moving);  
+            yield return null;
+            ChangeState(State.Moving);
         }
     }
     
     protected override IEnumerator Attacking()
     {
-        EnemyRigidbody.drag = QuietDrag;
         if (_targetDamageable == null || !player)
         {
-            ChangeState(State.Idle);
             yield return null;
+            ChangeState(State.Idle);
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
@@ -151,6 +169,7 @@ public class Enemy : BaseEnemy
             if (Distance > AttackRange)
             {
                 IsInRange = false;
+                yield return null;
                 ChangeState(State.Moving);
             }
             EnemyRigidbody.velocity = Vector3.zero;
@@ -170,10 +189,14 @@ public class Enemy : BaseEnemy
         Quaternion newRotation = Quaternion.LookRotation(newDirection);
         EnemyRigidbody.MoveRotation(Quaternion.Slerp(EnemyRigidbody.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime));
     }
+
+    public void SetSpawnPoint(Transform newSpawnPoint)
+    {
+        _targetsList.Add(newSpawnPoint.gameObject);
+    }
     
     public void SetTargetList(GameObject[] newTarget)
     {
-        _targetsList.Clear();
         _targetsList.AddRange(newTarget);
     }
     private void CheckTargets()
@@ -190,7 +213,16 @@ public class Enemy : BaseEnemy
                 player = target;
             }
         }
-        Debug.Log("ENEMYT Targets: " + _targetsList.Count + " Target: " + target);
+    }
+    
+    public override void TakeDamage(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Health = 0;
+            ChangeState(State.Death);
+        }
     }
 
     private bool ReachTarget()
