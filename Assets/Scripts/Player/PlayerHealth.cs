@@ -13,14 +13,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     
     private float _health;
 
-    private void Start()
-    {
-        OnHealthChanged?.Invoke(_health);
-    }
-
     private void Awake()
     {
         _health = playerData.MaxHealth;
+    }
+    private void Start()
+    {
+        OnHealthChanged?.Invoke(_health);
     }
 
     public void TakeDamage(float damage)

@@ -214,7 +214,11 @@ public class Enemy : BaseEnemy
             }
         }
     }
-    
+
+    public void SetPlayer(GameObject newPlayer)
+    {
+        player = newPlayer;
+    }
     public override void TakeDamage(float damage)
     {
         Health -= damage;
