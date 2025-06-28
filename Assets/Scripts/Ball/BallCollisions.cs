@@ -39,6 +39,7 @@ public class BallCollisions : MonoBehaviour
         if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
+            OnBallCrash?.Invoke();
             damageable.TakeDamage(_damage); 
         }
     }

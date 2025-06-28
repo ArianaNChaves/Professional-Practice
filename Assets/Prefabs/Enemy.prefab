@@ -266,8 +266,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
-  deathForce: 30
-  timeToDespawn: 2
+  deathForce: 25
+  timeToDespawn: 2.5
   isInScene: 0
   player: {fileID: 0}
 --- !u!1 &5222406254354917404
