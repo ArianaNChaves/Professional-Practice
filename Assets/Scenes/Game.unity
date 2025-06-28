@@ -3947,6 +3947,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2118744000}
     m_Modifications:
+    - target: {fileID: 1572401311768897756, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 716cd9a79da2cce43afbf84ccccc49f7, type: 2}
     - target: {fileID: 2619939762699222484, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.75
@@ -3991,7 +3995,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Eviroment (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7645,6 +7650,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2118744000}
     m_Modifications:
+    - target: {fileID: 1572401311768897756, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 716cd9a79da2cce43afbf84ccccc49f7, type: 2}
     - target: {fileID: 2619939762699222484, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.67
@@ -7689,7 +7698,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Eviroment (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11489,7 +11499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2998304, y: 0.027244074, z: -0.008566382, w: 0.95356494}
+  m_LocalRotation: {x: 0.29985684, y: 0.024124254, z: -0.0075854138, w: 0.953649}
   m_LocalPosition: {x: -2.2864494, y: 17.44586, z: -10.296359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12900,6 +12910,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2118744000}
     m_Modifications:
+    - target: {fileID: 1572401311768897756, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 716cd9a79da2cce43afbf84ccccc49f7, type: 2}
     - target: {fileID: 2619939762699222484, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.11
@@ -12944,7 +12958,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Eviroment
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -14246,19 +14261,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95356494
+      value: 0.953649
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2998304
+      value: 0.29985684
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.027244074
+      value: 0.024124254
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.008566382
+      value: -0.0075854138
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange
