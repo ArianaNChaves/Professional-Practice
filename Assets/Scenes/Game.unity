@@ -11499,7 +11499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29985684, y: 0.024124254, z: -0.0075854138, w: 0.953649}
+  m_LocalRotation: {x: 0.299863, y: 0.023335747, z: -0.007337483, w: 0.9536686}
   m_LocalPosition: {x: -2.2864494, y: 17.44586, z: -10.296359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13478,7 +13478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalEnemyPrefab: {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}
-  normalEnemyPrefabSize: 5
+  normalEnemyPrefabSize: 100
 --- !u!1001 &1674068399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14273,19 +14273,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.953649
+      value: 0.9536686
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.29985684
+      value: 0.299863
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.024124254
+      value: 0.023335747
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0075854138
+      value: -0.007337483
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange

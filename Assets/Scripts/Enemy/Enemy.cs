@@ -34,7 +34,6 @@ public class Enemy : BaseEnemy
         }
     }
     
-
     public void Activate()
     {
         Health = enemyData.MaxHealth;
@@ -57,6 +56,7 @@ public class Enemy : BaseEnemy
         EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
         EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
+        EnemyRigidbody.useGravity = true;
         OnEnemyDeath?.Invoke();
         yield return new WaitForSeconds(timeToDespawn);
         ReturnObjectToPool();
@@ -103,8 +103,7 @@ public class Enemy : BaseEnemy
     
     public override void ReturnObjectToPool()
     {
-        StopAllCoroutines();
-        PoolManager.Instance.ReturnToPool(this);
+        this.gameObject.SetActive(false);
     }
 
     protected override IEnumerator Moving()
