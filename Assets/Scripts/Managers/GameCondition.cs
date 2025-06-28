@@ -15,14 +15,14 @@ public class GameCondition : MonoBehaviour
     private void Start()
     {
         playerHealth.OnDeath.AddListener(LoseGame);
-        PlayerHealth.OnHealthChanged += OnPlayerHealthChanged;
+        PlayerHealth.OnPlayerHit += OnPlayerPlayerHit;
         Enemy.OnEnemyDeath += HandleEnemyDeath;
     }
 
     private void OnDestroy()
     {
         playerHealth.OnDeath.RemoveListener(LoseGame);
-        PlayerHealth.OnHealthChanged -= OnPlayerHealthChanged;
+        PlayerHealth.OnPlayerHit -= OnPlayerPlayerHit;
         Enemy.OnEnemyDeath -= HandleEnemyDeath;
     }
 
@@ -35,7 +35,7 @@ public class GameCondition : MonoBehaviour
         }
     }
 
-    private void OnPlayerHealthChanged(float health)
+    private void OnPlayerPlayerHit(float health)
     {
         playerHealthText.text = Mathf.RoundToInt(health).ToString();
     }

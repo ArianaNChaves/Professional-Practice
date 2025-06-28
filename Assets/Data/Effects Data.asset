@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Effects Data
   m_EditorClassIdentifier: 
   shakeDuration: 0.5
-  shakeMagnitude: 5
+  shakeMagnitude: 8
   shakeFrequency: 2

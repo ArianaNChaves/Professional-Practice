@@ -15,6 +15,9 @@ public class EnemySO : ScriptableObject
     
     [Header("Spawn Settings")]
     [SerializeField] private Vector2 spawnRateBetween;
+
+    [Header("Time Settings")] 
+    [SerializeField] private float enemyTimeValue;
     
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float Speed { get => speed; set => speed = value; }
@@ -22,4 +25,5 @@ public class EnemySO : ScriptableObject
     public float AttackRange { get => attackRange; set => attackRange = value; }
     public float AttackRate { get => attackRate; set => attackRate = value; }
     public Vector2 SpawnRate { get => spawnRateBetween; set => spawnRateBetween = value; }
+    public float EnemyTimeValue { get => enemyTimeValue; set => enemyTimeValue = value; }
 }

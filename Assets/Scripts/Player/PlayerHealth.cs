@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public UnityEvent OnDeath;
-    public static event Action<float> OnHealthChanged;
+    public static event Action<float> OnPlayerHit;
     [SerializeField] private PlayerSO playerData;
     
     private float _health;
@@ -19,13 +19,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     }
     private void Start()
     {
-        OnHealthChanged?.Invoke(_health);
+        OnPlayerHit?.Invoke(_health);
     }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
-        OnHealthChanged?.Invoke(_health);
+        OnPlayerHit?.Invoke(_health);
         if (_health <= 0)
         {
             _health = 0;
