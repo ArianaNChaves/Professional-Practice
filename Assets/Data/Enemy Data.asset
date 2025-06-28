@@ -17,5 +17,5 @@ MonoBehaviour:
   damage: 0
   attackRange: 3
   attackRate: 2
-  startToCatchBetween: {x: 2, y: 10}
   spawnRateBetween: {x: 1, y: 10}
+  enemyTimeValue: 20

@@ -10822,6 +10822,7 @@ GameObject:
   - component: {fileID: 1294174449}
   - component: {fileID: 1294174451}
   - component: {fileID: 1294174450}
+  - component: {fileID: 1294174452}
   m_Layer: 5
   m_Name: Timer Panel
   m_TagString: Untagged
@@ -10889,6 +10890,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294174448}
   m_CullTransparentMesh: 1
+--- !u!114 &1294174452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294174448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cd121df1588894a8022846b26c7c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialTimeInMinutes: 10
+  enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
+  playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
+  secondsText: {fileID: 1172816876}
+  minutesText: {fileID: 761656042}
+  discountColor: {r: 0.33333334, g: 0.7254902, b: 0.3254902, a: 1}
+  addColor: {r: 0.9529412, g: 0.34509805, b: 0.28235295, a: 1}
+  shakeDuration: 0.5
+  shakeStrength: 10
 --- !u!1001 &1301280159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14774,7 +14796,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1796337779}
   - component: {fileID: 1796337777}
-  - component: {fileID: 1796337780}
   m_Layer: 0
   m_Name: Scene Managers
   m_TagString: Untagged
@@ -14811,23 +14832,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1796337780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796337776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8cd121df1588894a8022846b26c7c6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialTimeInMinutes: 10
-  enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
-  playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
-  secondsText: {fileID: 1172816876}
-  minutesText: {fileID: 761656042}
 --- !u!1001 &1800731758
 PrefabInstance:
   m_ObjectHideFlags: 0
