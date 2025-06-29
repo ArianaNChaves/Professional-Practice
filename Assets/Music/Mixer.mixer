@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-7353303035713383386
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 526c25e400050c14d8445d9ecb9f4443
+  m_EffectName: Send
+  m_MixLevel: 100dedebd63b9a74e90e27578d49518c
+  m_Parameters: []
+  m_SendTarget: {fileID: -4198855346297900085}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-5669495703578609727
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -15,10 +29,39 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -436855928194415600}
+  - {fileID: -4198855346297900085}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-4198855346297900085
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: adc34d8824f9d3d4ba7b0b8015f7b7e5
+  m_EffectName: Duck Volume
+  m_MixLevel: 8dc1f21c2075dd549a8acf0d702971ba
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 10c5d6a6158c29e4382ead8d349c8f43
+  - m_ParameterName: Ratio
+    m_GUID: 8182b58b7f1614b4d8fef5b4dd1070d0
+  - m_ParameterName: Attack Time
+    m_GUID: 143c241cc684d1b4b99fcf0e579dad4f
+  - m_ParameterName: Release Time
+    m_GUID: 0158d875e126f3542865158d68766eda
+  - m_ParameterName: Make-up Gain
+    m_GUID: 77134ebc251415b43a47b907283c2cd7
+  - m_ParameterName: Knee
+    m_GUID: de6ee3de43c220047ad0cc91e445ce28
+  - m_ParameterName: Sidechain Mix
+    m_GUID: f74bf97908caf3a429a1ae2e8018115b
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-1896046201366876599
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -33,6 +76,7 @@ AudioMixerGroupController:
   m_Pitch: c0ac4ff737356364cbb53a027ed011cc
   m_Send: 00000000000000000000000000000000
   m_Effects:
+  - {fileID: -7353303035713383386}
   - {fileID: 7738160575510488798}
   m_UserColorIndex: 0
   m_Mute: 0
@@ -120,7 +164,14 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 11de64a0bc0cbe948bad132663ea7f15
-  m_FloatValues: {}
+  m_FloatValues:
+    3470a8035f312aa4e8f9c7fec07f4dfe: 0.14
+    10c5d6a6158c29e4382ead8d349c8f43: -41.9
+    8182b58b7f1614b4d8fef5b4dd1070d0: 2.2
+    100dedebd63b9a74e90e27578d49518c: 0
+    c7fc8afd824094c49980ab0104c79159: 0.27
+    04c4c78e34b4ec441aa0a1b04dea9baf: 0.27
+    de6ee3de43c220047ad0cc91e445ce28: 12.5
   m_TransitionOverrides: {}
 --- !u!244 &7738160575510488798
 AudioMixerEffectController:
