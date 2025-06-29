@@ -14,6 +14,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: -4198855346297900085}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-6684587283088694082
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Attenuation
+  m_EffectID: 11338908d3a5c4048ab0cb966d3abc00
+  m_EffectName: Attenuation
+  m_MixLevel: 2b7c502be29043446b64ba6b2e3352c0
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-5669495703578609727
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -62,6 +76,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-4164187649193774388
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: ec6af7bc560254640a2fd020595c909f
+  m_Children: []
+  m_Volume: 85b4edbf731c89140a4a0f03e582eea2
+  m_Pitch: 5d8f8d2a81d4dcb408be5b4332d8556c
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -6684587283088694082}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &-1896046201366876599
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -102,7 +135,7 @@ AudioMixerController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mixer
+  m_Name: Game Mixer
   m_OutputGroup: {fileID: 0}
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
@@ -111,12 +144,19 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: c7fc8afd824094c49980ab0104c79159
+    name: MusicVolume
+  - guid: 3470a8035f312aa4e8f9c7fec07f4dfe
+    name: SFXVolume
+  - guid: 85b4edbf731c89140a4a0f03e582eea2
+    name: UiVolume
   m_AudioMixerGroupViews:
   - guids:
     - f082d94c7e4d532408578943e8a30bd0
     - d6129908ebee3b74fb45d3e1b71f0d0c
     - 23ca1344c7001c5479788f70b23e7e4a
+    - ec6af7bc560254640a2fd020595c909f
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -132,6 +172,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -5669495703578609727}
   - {fileID: -1896046201366876599}
+  - {fileID: -4164187649193774388}
   m_Volume: 04c4c78e34b4ec441aa0a1b04dea9baf
   m_Pitch: 03c4ce3ae95440f418729741536a498d
   m_Send: 00000000000000000000000000000000
@@ -167,11 +208,13 @@ AudioMixerSnapshotController:
   m_FloatValues:
     3470a8035f312aa4e8f9c7fec07f4dfe: 0.14
     10c5d6a6158c29e4382ead8d349c8f43: -41.9
+    18fd2f1b2bf17dd4db60977587d95693: 0
     8182b58b7f1614b4d8fef5b4dd1070d0: 2.2
     100dedebd63b9a74e90e27578d49518c: 0
     c7fc8afd824094c49980ab0104c79159: 0.27
     04c4c78e34b4ec441aa0a1b04dea9baf: 0.27
     de6ee3de43c220047ad0cc91e445ce28: 12.5
+    85b4edbf731c89140a4a0f03e582eea2: 0.14
   m_TransitionOverrides: {}
 --- !u!244 &7738160575510488798
 AudioMixerEffectController:

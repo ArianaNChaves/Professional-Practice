@@ -14027,6 +14027,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c5196159f78335d418c8c843b705c7f5, type: 3}
   - soundName: UI Hover Button
     clip: {fileID: 8300000, guid: bc9cc4d708bdc134c8f846d1894278e0, type: 3}
+  audioData: {fileID: 11400000, guid: 0a07400fe963ccc46ab420f0f94db7ed, type: 2}
   audioMixer: {fileID: 24100000, guid: 2e31d777435dc5d43857014bffc816cf, type: 2}
   musicSource: {fileID: 1671923550}
   sfxSource: {fileID: 1671923549}

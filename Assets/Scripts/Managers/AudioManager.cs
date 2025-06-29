@@ -7,14 +7,14 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviourSingleton<AudioManager>
 {
     [SerializeField] private Sound[] musicSounds, sfxSounds;
+    [SerializeField] private AudioSO audioData;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource musicSource, sfxSource;
 
     private string _lastSong;
-    private float _musicVolume;
-    private float _SFXVolume;
     private const string MixerMusic = "MusicVolume";
     private const string MixerSFX = "SFXVolume";
+    private const string MixerUi = "UiVolume";
     
 
     public void PlayMusic(string musicName)
@@ -46,23 +46,33 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     }
     public void MusicVolume(float volume)
     {
-        _musicVolume = volume;
+        audioData.MusicVolume = volume;
         audioMixer.SetFloat(MixerMusic, Mathf.Log10(volume) * 20);
     }
     public void SfxVolume(float volume)
     {
-        _SFXVolume = volume;
+        audioData.SFXVolume = volume;
         audioMixer.SetFloat(MixerSFX, Mathf.Log10(volume) * 20);
+    }
+    
+    public void UiVolume(float volume)
+    {
+        audioData.UIVolume = volume;
+        audioMixer.SetFloat(MixerUi, Mathf.Log10(volume) * 20);
     }
 
     public float GetMusicVolume()
     {
-        return _musicVolume;
+        return audioData.MusicVolume;
     }
 
     public float GetSFXVolume()
     {
-        return _SFXVolume;
+        return audioData.MusicVolume;
+    }
+    public float GetUiVolume()
+    {
+        return audioData.MusicVolume;
     }
     public void StopMusic()
     {
