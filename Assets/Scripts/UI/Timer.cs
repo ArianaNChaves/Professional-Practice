@@ -26,6 +26,8 @@ public class Timer : MonoBehaviour
     private int _lastTime;
     private int _secondTime;
     private int _lastMinute;
+    private bool _invulnerability;
+    private bool _endless;
     private string _currentTrack;
     private AudioManager _audioManager;
     
@@ -51,11 +53,14 @@ public class Timer : MonoBehaviour
         if (_timeLeft < 0f)
         {
             _timeLeft = 0f;
-            SceneManager.LoadScene("Credits");
+            if (!_endless)
+            {
+                SceneManager.LoadScene("Credits");
+            }
         }
         UpdateTime();
     }
-
+    
     private void OnEnable()
     {
         Enemy.OnEnemyDeath += OnDiscountTime;
@@ -70,6 +75,7 @@ public class Timer : MonoBehaviour
 
     private void OnDiscountTime()
     {
+        if (_invulnerability) return;
         _timeLeft -= enemyData.EnemyTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeDiscount());
@@ -138,5 +144,14 @@ public class Timer : MonoBehaviour
         }
         _panel.rectTransform.localPosition = _basePos;
         _panel.color = _baseColor;
+    }
+
+    private void SetInvulnerability(bool value)
+    {
+        _invulnerability = value;
+    }
+    private void SetEndless(bool value)
+    {
+        _endless = value;
     }
 }

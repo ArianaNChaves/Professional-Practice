@@ -237,7 +237,7 @@ MonoBehaviour:
     m_ActionId: 16290a54-e2be-45d7-a6ca-e16e3c2e9867
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Player
+  m_DefaultControlScheme: Keyboard Scheme
   m_DefaultActionMap: PlayerMaps
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -278,10 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5787a1b95368b245b06753499b87127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
 --- !u!114 &6629363462509773301
 MonoBehaviour:
   m_ObjectHideFlags: 0
