@@ -11825,7 +11825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2248135, y: 0.023323966, z: -0.0053829188, w: 0.97410774}
+  m_LocalRotation: {x: 0.22482777, y: 0.020576047, z: -0.0047487267, w: 0.9741697}
   m_LocalPosition: {x: -2.854094, y: 17.165709, z: -16.794765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14539,19 +14539,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97410774
+      value: 0.9741697
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2248135
+      value: 0.22482777
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.023323966
+      value: 0.020576047
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0053829188
+      value: -0.0047487267
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange
@@ -14613,6 +14613,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1693946250}
   m_SourcePrefab: {fileID: 100100000, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
+--- !u!114 &1783658744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9023287003210157761, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
+  m_PrefabInstance: {fileID: 1783658743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693946249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1787278421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17115,6 +17126,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563969934815656959, guid: 662345739a93e4044a6cf135199d751a, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1783658744}
     - target: {fileID: 7739074268151910451, guid: 662345739a93e4044a6cf135199d751a, type: 3}
       propertyPath: m_Name
       value: Device
