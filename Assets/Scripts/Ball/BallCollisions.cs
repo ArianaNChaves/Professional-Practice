@@ -24,7 +24,6 @@ public class BallCollisions : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        //obstacle
         if (Utilities.CompareLayerAndMask(obstacleMask, other.gameObject.layer))
         {
             if (_rigidbody.velocity.magnitude >= BallSpeed)
@@ -34,7 +33,6 @@ public class BallCollisions : MonoBehaviour
             }
         }
         
-        //Enemy
         if (!Utilities.CompareLayerAndMask(enemyMask, other.gameObject.layer)) return;
         if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
         if (other.gameObject.TryGetComponent(out IDamageable damageable))

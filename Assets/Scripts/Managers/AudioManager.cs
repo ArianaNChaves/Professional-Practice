@@ -6,10 +6,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviourSingleton<AudioManager>
 {
-    [SerializeField] private Sound[] musicSounds, sfxSounds;
+    [SerializeField] private Sound[] musicSounds, sfxSounds, uiSounds;
     [SerializeField] private AudioSO audioData;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private AudioSource musicSource, sfxSource;
+    [SerializeField] private AudioSource musicSource, sfxSource, uiSource;
 
     private string _lastSong;
     private const string MixerMusic = "MusicVolume";
@@ -42,6 +42,18 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
         else
         {
             sfxSource.PlayOneShot(effect.clip);
+        }
+    }
+    public void PlayUiEffect(string effectName)
+    {
+        Sound effect = Array.Find(uiSounds, x => x.soundName == effectName);
+        if (effect == null)
+        {
+            Debug.LogError("Effect not found");
+        }
+        else
+        {
+            uiSource.PlayOneShot(effect.clip);
         }
     }
     public void MusicVolume(float volume)
@@ -83,7 +95,11 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     {
         Destroy(gameObject);
     }
-    
+
+    public Sound GetSFXSound(string soundName)
+    {
+        return Array.Find(sfxSounds, x => x.soundName == soundName);
+    }
     
     [System.Serializable]
     public class Sound

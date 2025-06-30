@@ -27,6 +27,7 @@ public class CameraShake : MonoBehaviour
     }
     private void Shake()
     {
+        AudioManager.Instance.PlayEffect("Ball Impact");
         StartCoroutine(ShakeCoroutine());
     }
     

@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _input;
     private Rigidbody _rigidbody;
     private bool _canMove = true;
+    private bool _isMoving;
+    private Coroutine _moveCoroutine;
     
     private void Awake()
     {
@@ -32,6 +34,30 @@ public class PlayerMovement : MonoBehaviour
     public void OnMovement(Vector2 context)
     {
         _input = context;
+        PlayMoveSound();
+    }
+    private void PlayMoveSound()
+    {
+        float moveSound = AudioManager.Instance.GetSFXSound("Player Movement").clip.length;
+        if (_moveCoroutine == null) _moveCoroutine = StartCoroutine(MoveSound(moveSound));
+    }
+    
+    private void StopMoveSound()
+    {
+        if (_moveCoroutine != null)
+        {
+            StopCoroutine(_moveCoroutine);
+            _moveCoroutine = null;
+        }
+    }
+
+    private IEnumerator MoveSound(float duration)
+    {
+        while (_isMoving)
+        {
+            AudioManager.Instance.PlayEffect("Player Movement");
+            yield return new WaitForSeconds(duration);
+        }
     }
 
     private void Move()
@@ -42,8 +68,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (_input.sqrMagnitude < Mathf.Epsilon)
         {
+            StopMoveSound();
             return;
         }
+
+        _isMoving = _rigidbody.velocity.magnitude > 0.1f;
         
         Vector3 direction = transform.right * _input.x + transform.forward * _input.y;
 
@@ -57,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody.MovePosition(newPosition);
         }
-        
     }
     
     private void Rotation(Vector3 direction)

@@ -11819,7 +11819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22485302, y: 0.014496395, z: -0.0033456099, w: 0.97427917}
+  m_LocalRotation: {x: 0.22481743, y: 0.022600139, z: -0.0052158656, w: 0.97412485}
   m_LocalPosition: {x: -2.854094, y: 17.165709, z: -16.794765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14025,12 +14025,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d9f97fbb2755efe4aa21430ce70d498d, type: 3}
   - soundName: Player Movement
     clip: {fileID: 8300000, guid: c5196159f78335d418c8c843b705c7f5, type: 3}
-  - soundName: UI Hover Button
+  uiSounds:
+  - soundName: Ui Hover Button
     clip: {fileID: 8300000, guid: bc9cc4d708bdc134c8f846d1894278e0, type: 3}
   audioData: {fileID: 11400000, guid: 0a07400fe963ccc46ab420f0f94db7ed, type: 2}
   audioMixer: {fileID: 24100000, guid: 2e31d777435dc5d43857014bffc816cf, type: 2}
   musicSource: {fileID: 1671923550}
   sfxSource: {fileID: 1671923549}
+  uiSource: {fileID: 0}
 --- !u!1001 &1674068399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14825,19 +14827,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97427917
+      value: 0.97412485
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22485302
+      value: 0.22481743
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.014496395
+      value: 0.022600139
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0033456099
+      value: -0.0052158656
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange
