@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         AudioManager.Instance.PlayMusic("Main Menu");
     }
     public void PlayGame()

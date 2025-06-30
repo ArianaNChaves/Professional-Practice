@@ -10,7 +10,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private string targetSceneName; 
     private bool isPaused = false;
 
-
     private void OnEnable()
     {
         PlayerInputs.OnPauseGame += TogglePause;
@@ -24,6 +23,8 @@ public class PauseManager : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
+        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isPaused;
         if (pausePanel != null) pausePanel.SetActive(isPaused);
     }
 
