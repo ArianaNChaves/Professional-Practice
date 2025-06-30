@@ -10912,9 +10912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cd121df1588894a8022846b26c7c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialTimeInMinutes: 10
   enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
   playerData: {fileID: 11400000, guid: 120fd7d38f4f5d0428d824584c1d29b7, type: 2}
+  effectsData: {fileID: 11400000, guid: 11e93bebf27d7c0449e4d7b17b8d9187, type: 2}
   secondsText: {fileID: 1172816876}
   minutesText: {fileID: 761656042}
   discountColor: {r: 0.33333334, g: 0.7254902, b: 0.3254902, a: 1}
@@ -11819,7 +11819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22481743, y: 0.022600139, z: -0.0052158656, w: 0.97412485}
+  m_LocalRotation: {x: 0.22482902, y: 0.02031655, z: -0.0046888385, w: 0.97417516}
   m_LocalPosition: {x: -2.854094, y: 17.165709, z: -16.794765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14010,14 +14010,14 @@ MonoBehaviour:
   musicSounds:
   - soundName: Credits
     clip: {fileID: 8300000, guid: 6d81b07a52923c34cbbbb525fa03b9e2, type: 3}
-  - soundName: First Level
+  - soundName: Initial Time
     clip: {fileID: 8300000, guid: 63b3b02b64014344c9874731b85f32cd, type: 3}
-  - soundName: Last Level
+  - soundName: Last Time
     clip: {fileID: 8300000, guid: ee78b12f50f499c4e9b9b0658fdf79f8, type: 3}
+  - soundName: Second Time
+    clip: {fileID: 8300000, guid: f09bb1c137fe92a4184905eaca76b844, type: 3}
   - soundName: Main Menu
     clip: {fileID: 8300000, guid: 6f56ee19b82e8854c981290b6e6e84be, type: 3}
-  - soundName: Second Level
-    clip: {fileID: 8300000, guid: f09bb1c137fe92a4184905eaca76b844, type: 3}
   sfxSounds:
   - soundName: Ball Impact
     clip: {fileID: 8300000, guid: faa26ba14ff64464e9a7feb286c74dc9, type: 3}
@@ -14827,19 +14827,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97412485
+      value: 0.97417516
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22481743
+      value: 0.22482902
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.022600139
+      value: 0.02031655
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0052158656
+      value: -0.0046888385
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange

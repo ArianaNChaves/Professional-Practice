@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private int initialTimeInMinutes;
     [SerializeField] private EnemySO enemyData;
     [SerializeField] private PlayerSO playerData;
+    [SerializeField] private EffectsSO effectsData;
     [SerializeField] private TextMeshProUGUI secondsText;
     [SerializeField] private TextMeshProUGUI minutesText;
     [SerializeField] private Color discountColor;
@@ -20,11 +20,24 @@ public class Timer : MonoBehaviour
     private Image _panel;
     private Color _baseColor;
     private Vector3 _basePos;
-
+    private Coroutine _shakeCoroutine;
+    private int _initialTime;
+    private int _lastTime;
+    private int _secondTime;
+    private int _lastMinute;
+    private string _currentTrack;
+    private AudioManager _audioManager;
+    
     private void Start()
     {
-        _timeLeft = initialTimeInMinutes * 60f;
-        UpdateTimeDisplay();
+        _initialTime = effectsData.InitialTime;
+        _lastTime = effectsData.LastTime;
+        _secondTime = effectsData.SecondTime;
+        _lastMinute = _initialTime;
+        _audioManager = AudioManager.Instance;
+        
+        _timeLeft = _initialTime * 60f;
+        UpdateTime();
 
         _panel = GetComponent<Image>();
         _baseColor = _panel.color;
@@ -35,7 +48,7 @@ public class Timer : MonoBehaviour
     {
         _timeLeft -= Time.deltaTime;
         if (_timeLeft < 0f) _timeLeft = 0f;
-        UpdateTimeDisplay();
+        UpdateTime();
     }
 
     private void OnEnable()
@@ -63,13 +76,31 @@ public class Timer : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(ShakeAdd());
     }
-
-    private void UpdateTimeDisplay()
+    
+    private void UpdateTime()
     {
         int minutes = Mathf.FloorToInt(_timeLeft / 60f);
         int seconds = Mathf.FloorToInt(_timeLeft % 60f);
         minutesText.text = minutes.ToString("00");
         secondsText.text = seconds.ToString("00");
+        if (minutes == _lastMinute) return;
+        _lastMinute = minutes;
+        PlayMusicWhile(minutes);
+    }
+
+    private void PlayMusicWhile(int minutes)
+    {
+        string nextTrack;
+        if (minutes > _secondTime)
+            nextTrack = "Initial Time";
+        else if (minutes > _lastTime)
+            nextTrack = "Second Time";
+        else
+            nextTrack = "Last Time";
+        if (nextTrack == _currentTrack) 
+            return;
+        _currentTrack = nextTrack;
+        _audioManager.PlayMusic(_currentTrack);
     }
 
     private IEnumerator ShakeAdd()

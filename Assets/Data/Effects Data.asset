@@ -15,3 +15,6 @@ MonoBehaviour:
   shakeDuration: 0.5
   shakeMagnitude: 8
   shakeFrequency: 2
+  initialTime: 15
+  secondTime: 7
+  lastTime: 3
