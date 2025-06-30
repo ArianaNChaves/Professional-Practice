@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
+    public static event Action OnPauseGame;
+    public static event Action Oninteraction;
     [SerializeField] private PlayerMovement playerMovement;
     
     private PlayerInputActions _playerInputActions;
@@ -19,6 +21,9 @@ public class PlayerInputs : MonoBehaviour
         _playerInputActions.PlayerMaps.Enable();
         _playerInputActions.PlayerMaps.Movement.performed += OnMovement;
         _playerInputActions.PlayerMaps.Movement.canceled += OnMovement;
+        _playerInputActions.PlayerMaps.Pause.started += OnPause;
+        _playerInputActions.PlayerMaps.Interact.started += OnInteract;
+
     }
     
     private void OnDisable()
@@ -26,10 +31,20 @@ public class PlayerInputs : MonoBehaviour
         _playerInputActions.PlayerMaps.Disable();
         _playerInputActions.PlayerMaps.Movement.performed -= OnMovement;
         _playerInputActions.PlayerMaps.Movement.canceled -= OnMovement;
+        _playerInputActions.PlayerMaps.Pause.started -= OnPause;
+        _playerInputActions.PlayerMaps.Interact.started -= OnInteract;
     }
     
     private void OnMovement(InputAction.CallbackContext context)
     {
         playerMovement.OnMovement(context.ReadValue<Vector2>());
+    }
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        OnPauseGame?.Invoke();
+    }
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        Oninteraction?.Invoke();
     }
 }

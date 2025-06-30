@@ -9,6 +9,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private string creditsSceneName;
     [SerializeField] private string mainMenuSceneName;
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic("Main Menu");
+    }
     public void PlayGame()
     {
         SceneManager.LoadScene(playSceneName);

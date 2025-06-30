@@ -33,7 +33,6 @@ public class ControlDetection : MonoBehaviour
 
     private void OnChangeDevice(PlayerInput newDevice)
     {
-        Debug.Log($"Cambio de control {newDevice.currentControlScheme}");
         if (newDevice.currentControlScheme == "Keyboard Scheme")
         {
             _currentDevice = ControlDevice.Keyboard;

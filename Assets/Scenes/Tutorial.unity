@@ -4180,6 +4180,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5941896093014226782, guid: 2d0a7bf135754d442924e5570d5b754c, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 8185309194155328254, guid: b6e1d08145fd2d944a6f4c2336f7c45c, type: 3}
     - target: {fileID: 7078495444933696889, guid: 2d0a7bf135754d442924e5570d5b754c, type: 3}
       propertyPath: m_Name
       value: Pause Menu
@@ -13228,6 +13232,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3db4c941fe3f6674db5f4373db979281, type: 3}
   m_PrefabInstance: {fileID: 803812630}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543880846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543880848}
+  - component: {fileID: 1543880847}
+  m_Layer: 0
+  m_Name: Scene Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1543880847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543880846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15da367cc2ab4834ebc3e111d262bf08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1543880848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543880846}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1544884130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19404,6 +19452,7 @@ SceneRoots:
   - {fileID: 594005340}
   - {fileID: 1288277989}
   - {fileID: 1474195815}
+  - {fileID: 1543880848}
   - {fileID: 4720197195163200901}
   - {fileID: 1796337779}
   - {fileID: 3702761}

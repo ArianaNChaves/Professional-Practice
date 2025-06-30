@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement; // Required for scene management
 
 public class PauseManager : MonoBehaviour
@@ -9,24 +10,21 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private string targetSceneName; 
     private bool isPaused = false;
 
-    private void Update()
+
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TogglePause();
-        }
+        PlayerInputs.OnPauseGame += TogglePause;
+    }
+    private void OnDisable()
+    {
+        PlayerInputs.OnPauseGame += TogglePause;
     }
 
     private void TogglePause()
     {
         isPaused = !isPaused;
-        
         Time.timeScale = isPaused ? 0f : 1f;
-        
-        if (pausePanel != null)
-        {
-            pausePanel.SetActive(isPaused);
-        }
+        if (pausePanel != null) pausePanel.SetActive(isPaused);
     }
 
     public void ResumeGame()
