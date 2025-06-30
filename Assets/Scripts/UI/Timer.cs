@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -47,7 +48,11 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         _timeLeft -= Time.deltaTime;
-        if (_timeLeft < 0f) _timeLeft = 0f;
+        if (_timeLeft < 0f)
+        {
+            _timeLeft = 0f;
+            SceneManager.LoadScene("Credits");
+        }
         UpdateTime();
     }
 
