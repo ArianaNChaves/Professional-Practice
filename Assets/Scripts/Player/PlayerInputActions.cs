@@ -35,6 +35,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4712f41-4b91-433f-ab1b-ba89420301b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d47d857-533a-422a-b7ae-7cad3147c48c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -44,7 +62,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player"",
+                    ""groups"": ""Mando Scheme"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -66,7 +84,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player"",
+                    ""groups"": ""Keyboard Scheme"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -77,7 +95,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player"",
+                    ""groups"": ""Keyboard Scheme"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -88,7 +106,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player"",
+                    ""groups"": ""Keyboard Scheme"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -99,25 +117,88 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player"",
+                    ""groups"": ""Keyboard Scheme"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39213c89-1619-41d1-bb2e-0cc13fbd3c4e"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1978815-f359-4f42-aa1d-6f91a8bf4ecc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mando Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad904418-20cc-4ddd-b0dc-d0d95a77ac56"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Scheme"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9a00348-eeef-4b0e-8552-cb0c19d7722d"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mando Scheme"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Player"",
-            ""bindingGroup"": ""Player"",
-            ""devices"": []
+            ""name"": ""Keyboard Scheme"",
+            ""bindingGroup"": ""Keyboard Scheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Mando Scheme"",
+            ""bindingGroup"": ""Mando Scheme"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
         // PlayerMaps
         m_PlayerMaps = asset.FindActionMap("PlayerMaps", throwIfNotFound: true);
         m_PlayerMaps_Movement = m_PlayerMaps.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerMaps_Interact = m_PlayerMaps.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerMaps_Pause = m_PlayerMaps.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,11 +261,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMaps;
     private List<IPlayerMapsActions> m_PlayerMapsActionsCallbackInterfaces = new List<IPlayerMapsActions>();
     private readonly InputAction m_PlayerMaps_Movement;
+    private readonly InputAction m_PlayerMaps_Interact;
+    private readonly InputAction m_PlayerMaps_Pause;
     public struct PlayerMapsActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerMapsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMaps_Movement;
+        public InputAction @Interact => m_Wrapper.m_PlayerMaps_Interact;
+        public InputAction @Pause => m_Wrapper.m_PlayerMaps_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -197,6 +282,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerMapsActions instance)
@@ -204,6 +295,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerMapsActions instance)
@@ -221,17 +318,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMapsActions @PlayerMaps => new PlayerMapsActions(this);
-    private int m_PlayerSchemeIndex = -1;
-    public InputControlScheme PlayerScheme
+    private int m_KeyboardSchemeSchemeIndex = -1;
+    public InputControlScheme KeyboardSchemeScheme
     {
         get
         {
-            if (m_PlayerSchemeIndex == -1) m_PlayerSchemeIndex = asset.FindControlSchemeIndex("Player");
-            return asset.controlSchemes[m_PlayerSchemeIndex];
+            if (m_KeyboardSchemeSchemeIndex == -1) m_KeyboardSchemeSchemeIndex = asset.FindControlSchemeIndex("Keyboard Scheme");
+            return asset.controlSchemes[m_KeyboardSchemeSchemeIndex];
+        }
+    }
+    private int m_MandoSchemeSchemeIndex = -1;
+    public InputControlScheme MandoSchemeScheme
+    {
+        get
+        {
+            if (m_MandoSchemeSchemeIndex == -1) m_MandoSchemeSchemeIndex = asset.FindControlSchemeIndex("Mando Scheme");
+            return asset.controlSchemes[m_MandoSchemeSchemeIndex];
         }
     }
     public interface IPlayerMapsActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
