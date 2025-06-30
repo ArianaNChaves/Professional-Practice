@@ -18,14 +18,13 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name != mainMenuSceneName) return;
+        if (volumeSlider == null) return;
         volumeSlider.onValueChanged.AddListener(SetGeneralVolume);
     }
 
     private void OnDisable()
     {
-        if (SceneManager.GetActiveScene().name != mainMenuSceneName) return;
-
+        if (volumeSlider == null) return;
         volumeSlider.onValueChanged.RemoveListener(SetGeneralVolume);
     }
 
@@ -34,7 +33,6 @@ public class MenuManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         AudioManager.Instance.PlayMusic("Main Menu");
-        if (SceneManager.GetActiveScene().name != mainMenuSceneName) return;
         AudioManager.Instance.MasterVolume(volumeSlider.value);
     }
     public void PlayGame()
