@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     private const string MixerMusic = "MusicVolume";
     private const string MixerSFX = "SFXVolume";
     private const string MixerUi = "UiVolume";
+    private const string MixerMaster = "MasterVolume";
 
     private void Awake()
     {
@@ -78,6 +79,12 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     {
         audioData.UIVolume = volume;
         audioMixer.SetFloat(MixerUi, Mathf.Log10(volume) * 20);
+    }
+    
+    public void MasterVolume(float volume)
+    {
+        audioData.MasterVolume = volume;
+        audioMixer.SetFloat(MixerMaster, Mathf.Log10(volume) * 20);
     }
 
     public float GetMusicVolume()
