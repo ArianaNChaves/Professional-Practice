@@ -26,8 +26,7 @@ public class Timer : MonoBehaviour
     private int _lastTime;
     private int _secondTime;
     private int _lastMinute;
-    private bool _invulnerability;
-    private bool _endless;
+    private bool _godMode;
     private string _currentTrack;
     private AudioManager _audioManager;
     
@@ -53,7 +52,7 @@ public class Timer : MonoBehaviour
         if (_timeLeft < 0f)
         {
             _timeLeft = 0f;
-            if (!_endless)
+            if (!_godMode)
             {
                 SceneManager.LoadScene("Credits");
             }
@@ -65,17 +64,18 @@ public class Timer : MonoBehaviour
     {
         Enemy.OnEnemyDeath += OnDiscountTime;
         PlayerHealth.OnPlayerHit += OnAddTime;
+        Cheats.OnGodMode += GodMode;
     }
 
     private void OnDisable()
     {
         Enemy.OnEnemyDeath -= OnDiscountTime;
         PlayerHealth.OnPlayerHit -= OnAddTime;
+        Cheats.OnGodMode -= GodMode;
     }
 
     private void OnDiscountTime()
     {
-        if (_invulnerability) return;
         _timeLeft -= enemyData.EnemyTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeDiscount());
@@ -83,6 +83,7 @@ public class Timer : MonoBehaviour
 
     private void OnAddTime()
     {
+        if (_godMode) return;
         _timeLeft += playerData.PlayerHitTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeAdd());
@@ -146,12 +147,8 @@ public class Timer : MonoBehaviour
         _panel.color = _baseColor;
     }
 
-    private void SetInvulnerability(bool value)
+    private void GodMode()
     {
-        _invulnerability = value;
-    }
-    private void SetEndless(bool value)
-    {
-        _endless = value;
+        _godMode = !_godMode;
     }
 }

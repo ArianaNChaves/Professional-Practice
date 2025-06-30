@@ -8,6 +8,7 @@ public class PlayerInputs : MonoBehaviour
 {
     public static event Action OnPauseGame;
     public static event Action Oninteraction;
+    public static event Action OnCheats;
     [SerializeField] private PlayerMovement playerMovement;
     
     private PlayerInputActions _playerInputActions;
@@ -23,6 +24,7 @@ public class PlayerInputs : MonoBehaviour
         _playerInputActions.PlayerMaps.Movement.canceled += OnMovement;
         _playerInputActions.PlayerMaps.Pause.started += OnPause;
         _playerInputActions.PlayerMaps.Interact.started += OnInteract;
+        _playerInputActions.PlayerMaps.Cheats.started += OnCheatsUsed;
 
     }
     
@@ -33,6 +35,7 @@ public class PlayerInputs : MonoBehaviour
         _playerInputActions.PlayerMaps.Movement.canceled -= OnMovement;
         _playerInputActions.PlayerMaps.Pause.started -= OnPause;
         _playerInputActions.PlayerMaps.Interact.started -= OnInteract;
+        _playerInputActions.PlayerMaps.Cheats.started -= OnCheatsUsed;
     }
     
     private void OnMovement(InputAction.CallbackContext context)
@@ -46,5 +49,9 @@ public class PlayerInputs : MonoBehaviour
     private void OnInteract(InputAction.CallbackContext context)
     {
         Oninteraction?.Invoke();
+    }
+    private void OnCheatsUsed(InputAction.CallbackContext context)
+    {
+        OnCheats?.Invoke();
     }
 }

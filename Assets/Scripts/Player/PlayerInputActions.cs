@@ -53,6 +53,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cheats"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e25a3a4-f52d-49dd-b356-c242a90f3f4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""584a600d-fd6b-471e-b8e6-f6ef13b47032"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard Scheme"",
+                    ""action"": ""Cheats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8cdb1a2-9348-4c54-a53e-bfbe568fbf28"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mando Scheme"",
+                    ""action"": ""Cheats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +230,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerMaps_Movement = m_PlayerMaps.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMaps_Interact = m_PlayerMaps.FindAction("Interact", throwIfNotFound: true);
         m_PlayerMaps_Pause = m_PlayerMaps.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerMaps_Cheats = m_PlayerMaps.FindAction("Cheats", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +295,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMaps_Movement;
     private readonly InputAction m_PlayerMaps_Interact;
     private readonly InputAction m_PlayerMaps_Pause;
+    private readonly InputAction m_PlayerMaps_Cheats;
     public struct PlayerMapsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -270,6 +303,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerMaps_Movement;
         public InputAction @Interact => m_Wrapper.m_PlayerMaps_Interact;
         public InputAction @Pause => m_Wrapper.m_PlayerMaps_Pause;
+        public InputAction @Cheats => m_Wrapper.m_PlayerMaps_Cheats;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -288,6 +322,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Cheats.started += instance.OnCheats;
+            @Cheats.performed += instance.OnCheats;
+            @Cheats.canceled += instance.OnCheats;
         }
 
         private void UnregisterCallbacks(IPlayerMapsActions instance)
@@ -301,6 +338,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Cheats.started -= instance.OnCheats;
+            @Cheats.performed -= instance.OnCheats;
+            @Cheats.canceled -= instance.OnCheats;
         }
 
         public void RemoveCallbacks(IPlayerMapsActions instance)
@@ -341,5 +381,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnCheats(InputAction.CallbackContext context);
     }
 }
