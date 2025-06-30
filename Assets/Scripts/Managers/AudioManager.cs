@@ -15,21 +15,28 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>
     private const string MixerMusic = "MusicVolume";
     private const string MixerSFX = "SFXVolume";
     private const string MixerUi = "UiVolume";
-    
+
+    private void Awake()
+    {
+        foreach (var sound in musicSounds)
+        {
+            sound.clip.LoadAudioData();
+        }
+    }
 
     public void PlayMusic(string musicName)
     {
         Sound sound = Array.Find(musicSounds, x => x.soundName == musicName);
-        if (sound == null)
+        if (musicName == _lastSong) return;
+        if (sound != null)
         {
-            Debug.LogError("Sound not found");
-        }
-        else
-        {
-            if (musicName == _lastSong) return;
             _lastSong = sound.soundName;
             musicSource.clip = sound.clip;
             musicSource.Play();
+        }
+        else
+        {
+            Debug.LogError("Sound not found");
         }
     }
     public void PlayEffect(string effectName)
