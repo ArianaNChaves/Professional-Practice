@@ -7,15 +7,15 @@ public class PlayerEnemyIntereact : MonoBehaviour
 {
     private void OnEnable()
     {
-        Enemy.OnSpawn += GivePlayerGameObject;
+        DeprecatedEnemy.OnSpawn += GivePlayerGameObject;
     }
     private void OnDisable()
     {
-        Enemy.OnSpawn -= GivePlayerGameObject;
+        DeprecatedEnemy.OnSpawn -= GivePlayerGameObject;
     }
 
-    private void GivePlayerGameObject(Enemy newEnemy)
+    private void GivePlayerGameObject(DeprecatedEnemy newDeprecatedEnemy)
     {
-        newEnemy.SetPlayer(gameObject);
+        newDeprecatedEnemy.SetPlayer(gameObject);
     }
 }

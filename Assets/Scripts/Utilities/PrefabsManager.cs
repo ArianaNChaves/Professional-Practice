@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PrefabsManager : MonoBehaviour
 {
-    [SerializeField] private Enemy normalEnemyPrefab;
+    [SerializeField] private DeprecatedEnemy normalDeprecatedEnemyPrefab;
     [SerializeField] private int normalEnemyPrefabSize;
     private bool _isPoolInitialized = false;
     void Start()
     {
         if (_isPoolInitialized) return;
         _isPoolInitialized = true;
-        PoolManager.Instance.InitializePool(normalEnemyPrefab, normalEnemyPrefabSize);
+        PoolManager.Instance.InitializePool(normalDeprecatedEnemyPrefab, normalEnemyPrefabSize);
     }
 
 

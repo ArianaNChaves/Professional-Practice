@@ -38,17 +38,17 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnHandler()
     {
-        Enemy newEnemy = PoolManager.Instance.Get<Enemy>();
+        DeprecatedEnemy newDeprecatedEnemy = PoolManager.Instance.Get<DeprecatedEnemy>();
 
-        if (!newEnemy)
+        if (!newDeprecatedEnemy)
         {
             Debug.LogError("New enemy es nulo - EnemySpawner.cs - SpawnHandler");
             return;
         }
-        newEnemy.transform.position = transform.position;
-        newEnemy.transform.rotation = transform.rotation;
-        newEnemy.gameObject.SetActive(true);
-        newEnemy.SetSpawnPoint(spawnPoint);
-        newEnemy.Activate();
+        newDeprecatedEnemy.transform.position = transform.position;
+        newDeprecatedEnemy.transform.rotation = transform.rotation;
+        newDeprecatedEnemy.gameObject.SetActive(true);
+        newDeprecatedEnemy.SetSpawnPoint(spawnPoint);
+        newDeprecatedEnemy.Activate();
     }
 }

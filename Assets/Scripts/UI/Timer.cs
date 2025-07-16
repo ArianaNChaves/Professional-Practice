@@ -62,14 +62,14 @@ public class Timer : MonoBehaviour
     
     private void OnEnable()
     {
-        Enemy.OnEnemyDeath += OnDiscountTime;
+        DeprecatedEnemy.OnEnemyDeath += OnDiscountTime;
         PlayerHealth.OnPlayerHit += OnAddTime;
         Cheats.OnGodMode += GodMode;
     }
 
     private void OnDisable()
     {
-        Enemy.OnEnemyDeath -= OnDiscountTime;
+        DeprecatedEnemy.OnEnemyDeath -= OnDiscountTime;
         PlayerHealth.OnPlayerHit -= OnAddTime;
         Cheats.OnGodMode -= GodMode;
     }

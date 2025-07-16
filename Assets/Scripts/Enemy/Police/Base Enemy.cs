@@ -18,8 +18,8 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable, IPooleable
     protected float Damage;
     protected float AttackRange;
     protected float AttackRate;
-    protected Vector3 TargetDirection;
     protected Rigidbody EnemyRigidbody;
+    protected Vector3 TargetDirection;
     protected Coroutine StateRoutine;
     protected float Distance;
     protected bool IsInRange;
