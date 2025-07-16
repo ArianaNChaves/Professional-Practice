@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public abstract class EventMachine
 {
     public enum EVENT
@@ -8,35 +9,35 @@ public abstract class EventMachine
         ENTER, UPDATE, EXIT
     }
     
-    protected EVENT Stage;
+    public EVENT EventStage;
     //
-    public EventMachine()
+    public EventMachine()//constructor
     {
-        Stage = EVENT.ENTER;
+        EventStage = EVENT.ENTER;
     }
     public virtual void Enter()
     {
-        Stage = EVENT.UPDATE;
+        EventStage = EVENT.UPDATE;
     }
     public virtual void Update()
     {
-        Stage = EVENT.UPDATE;
+        EventStage = EVENT.UPDATE;
     }
     public virtual void Exit()
     {
-        Stage = EVENT.EXIT;
+        EventStage = EVENT.EXIT;
     }
     public EventMachine Process()
     {
-        if (Stage == EVENT.ENTER)
+        if (EventStage == EVENT.ENTER)
         {
             Enter();
         }
-        if (Stage == EVENT.UPDATE)
+        if (EventStage == EVENT.UPDATE)
         {
             Update();
         }
-        if (Stage == EVENT.EXIT)
+        if (EventStage == EVENT.EXIT)
         {
             Exit();
         }

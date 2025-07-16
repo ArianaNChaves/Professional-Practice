@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyMachine : EventMachine
 {
     public enum STATE {IDLE, CHASE, ATTACK, DIE};
+    public STATE CurrenEnemytState;
 
     public EnemyMachine()
     {
-        Stage = EVENT.ENTER;
+        CurrenEnemytState = (STATE)EventStage;
     }
 }
