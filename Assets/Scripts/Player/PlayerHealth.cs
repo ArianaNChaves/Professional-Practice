@@ -6,12 +6,24 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
-{ public static event Action OnPlayerHit;
+{ 
+    [SerializeField] private PlayerSO playerData;
+    public static event Action OnPlayerHit;
+
+    private void Start()
+    {
+        OnSpawn();
+    }
 
     public void TakeDamage(float damage)
     {
         AudioManager.Instance.PlayEffect("Player Hit");
         OnPlayerHit?.Invoke();
+    }
+
+    private void OnSpawn()
+    {
+        playerData.PlayerDamageable = this;
     }
     
 }

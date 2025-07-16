@@ -13,11 +13,13 @@ public class PlayerSO : ScriptableObject
     [Header("Time Settings")] 
     [SerializeField] private float playerHitTimeValue;
     
+    private IDamageable _playerDamageable;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float Speed { get => speed; set => speed = value; }
     public float Damage { get => damage; set => damage = value; }
     
     public float PlayerHitTimeValue { get => playerHitTimeValue; set => playerHitTimeValue = value; }
+    public IDamageable PlayerDamageable { get => _playerDamageable; set => _playerDamageable = value; }
 
 
 }
