@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceOfficerEnemy : EnemyEntity
+public class PoliceOfficerEnemy : AbstractStateMachine<EventMachine, EnemyMachine>
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class PoliceOfficerEnemy : EnemyEntity
     // Update is called once per frame
     void Update()
     {
-        CurrentState.Process();
+        
     }
 }

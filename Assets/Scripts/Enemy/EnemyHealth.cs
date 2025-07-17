@@ -24,7 +24,6 @@ public class EnemyHealth : EnemyEntity, IDamageable
         if (_health <= 0)
         {
             _health = 0;
-            CurrentState = new EnemyDeath(this);
         }
     }
 }

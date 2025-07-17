@@ -10,7 +10,6 @@ public class EnemyEntity : MonoBehaviour, IPooleable
     [SerializeField] private Rigidbody enemyRigidbody;
     [SerializeField] private Collider enemyCollider;
     
-    protected EnemyMachine CurrentState;
     protected float MoveSpeed;
     protected float Damage;
     protected float AttackRange;

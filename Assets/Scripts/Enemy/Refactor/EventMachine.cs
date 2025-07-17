@@ -9,7 +9,7 @@ public abstract class EventMachine
         ENTER, UPDATE, EXIT
     }
     
-    public EVENT EventStage;
+    protected EVENT EventStage;
     //
     public EventMachine()//constructor
     {
