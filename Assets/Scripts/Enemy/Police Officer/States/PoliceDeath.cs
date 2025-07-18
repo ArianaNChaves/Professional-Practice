@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceAttack : EnemyState
+public class PoliceDeath : EnemyState
 {
-    public PoliceAttack()
+    public PoliceDeath()
     {
         stage = EVENT.ENTER;
-        state = STATE.ATTACK;
+        state = STATE.DEATH;
     }
 }

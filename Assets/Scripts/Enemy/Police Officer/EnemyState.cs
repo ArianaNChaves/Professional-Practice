@@ -1,16 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyState
 {
-    [SerializeField] private EnemySO enemyData;
-    
-    public enum STATE { IDLE,CHASE, ATTACK, DEATH }
+    public enum STATE { IDLE,CHASE, ATTACK, DEATH, RECOVER }
     protected STATE state;
+    protected Dictionary<STATE, EnemyState> EnemyStates;
+    protected EnemyState NextEnemyState;
     protected enum EVENT {ENTER, UPDATE, EXIT}
     protected EVENT stage;
-    protected EnemyState NextEnemyState;
+
+    public EnemyState()
+    {
+        EnemyStates = new Dictionary<STATE, EnemyState>();
+        state = STATE.IDLE;
+        stage = EVENT.ENTER;
+        NextEnemyState = this;
+    }
     
     public virtual void Enter()
     {
@@ -41,18 +49,19 @@ public class EnemyState
             return NextEnemyState;
         }
         
-        Debug.Log($"Stage {stage}");
         return this;
     }
 
     public void ChangeState(STATE to)
     {
+        if (!EnemyStates.TryGetValue(to, out var next)) throw new ArgumentException($"El estado {to} no existe.");
+
+        NextEnemyState = next;
         state = to;
+        stage = EVENT.ENTER;
     }
     
-    public STATE GetState()
-    {
-        return state;
-    }
-    
+    public STATE GetState() => state;
+
+    public IEnumerable<STATE> GetAvailableStates() => EnemyStates.Keys;
 }
