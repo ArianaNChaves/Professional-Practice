@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+// using static EnemyState;
 
 public class PoliceOfficer : MonoBehaviour
 {
@@ -9,11 +10,22 @@ public class PoliceOfficer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI myState;
     [SerializeField] private TextMeshProUGUI myStates;
     private EnemyState _currentState;
+    private Dictionary<EnemyState.STATE, EnemyState> _states;
     
     private void Awake()
     {
-        _currentState = new PoliceOfficerState();
+        // PoliceOfficer manages its own states
+        _states = new Dictionary<EnemyState.STATE, EnemyState>
+        {
+            { EnemyState.STATE.IDLE, new PoliceIdle() },
+            { EnemyState.STATE.CHASE, new PoliceChase() },
+            { EnemyState.STATE.ATTACK, new PoliceAttack() },
+            { EnemyState.STATE.DEATH, new PoliceDeath() },
+        };
+        
+        _currentState = _states[EnemyState.STATE.IDLE];
     }
+
     private void Update()
     {
         _currentState = _currentState.Process();
@@ -26,10 +38,9 @@ public class PoliceOfficer : MonoBehaviour
 
             Debug.Log($"→ Estado actual: {_currentState.GetState()}");
 
-            var posibles = string.Join(", ", _currentState.GetAvailableStates());
+            var posibles = string.Join(", ", GetAvailableStates());
             Debug.Log($"→ Estados disponibles: {posibles}");
             
-            _currentState.ChangeState(EnemyState.STATE.RECOVER);
             Debug.Log($"→ Estado actual: {_currentState.GetState()}");
             // _currentState.ChangeState(EnemyState.STATE.CHASE);
         }
@@ -39,6 +50,8 @@ public class PoliceOfficer : MonoBehaviour
     {
         myState.text = _currentState.GetState().ToString();
         
-        myStates.text = string.Join("\n", _currentState.GetAvailableStates());
+        myStates.text = string.Join("\n", GetAvailableStates());
     }
+    public IEnumerable<EnemyState.STATE> GetAvailableStates() => _states.Keys;
+
 }
