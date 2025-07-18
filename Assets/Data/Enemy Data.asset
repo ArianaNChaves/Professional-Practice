@@ -17,5 +17,8 @@ MonoBehaviour:
   damage: 0
   attackRange: 3
   attackRate: 2
+  rotationSpeed: 4
   spawnRateBetween: {x: 1, y: 10}
+  timeToDespawn: 4
+  deathForce: 30
   enemyTimeValue: 20

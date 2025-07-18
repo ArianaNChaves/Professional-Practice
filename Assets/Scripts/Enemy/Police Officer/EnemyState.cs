@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyState
 {
-    public enum STATE { IDLE,CHASE, ATTACK, DEATH}
+    public enum STATE { IDLE,CHASE, ATTACK, DEATH, RECOVERY}
     protected STATE state;
     protected EnemyState NextEnemyState;
     protected enum EVENT {ENTER, UPDATE, EXIT}
@@ -34,8 +34,13 @@ public class EnemyState
         return this;
     }
 
-    public void ChangeState(STATE to)
+    public void ChangeState(Dictionary<STATE, EnemyState> states, STATE to)
     {
+        if (!states.TryGetValue(to, out var next))
+        {
+            throw new ArgumentException($"El estado {to} no existe en el diccionario enviado");
+        }
+        NextEnemyState = next;
         state = to;
         stage = EVENT.ENTER;
     }

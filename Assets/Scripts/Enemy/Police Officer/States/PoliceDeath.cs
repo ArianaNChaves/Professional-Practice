@@ -9,4 +9,9 @@ public class PoliceDeath : EnemyState
         stage = EVENT.ENTER;
         state = STATE.DEATH;
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
 }

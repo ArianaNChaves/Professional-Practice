@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2619939762699222484}
   - component: {fileID: 2045171836136209726}
   - component: {fileID: 3891600771281781283}
+  - component: {fileID: 2027360485689192941}
   m_Layer: 9
   m_Name: Police Officer
   m_TagString: Untagged
@@ -245,6 +246,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2027360485689192941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671142383101091916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ddc82ab30105ca4b95d5474d2b1b384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingWaitTime: 4
+  rotationSpeed: 4
+  target: {fileID: 0}
+  enemyAnimation: {fileID: 5133705690124235605}
+  enemyData: {fileID: 11400000, guid: 92d26293993eef444842ad7fc1d971f7, type: 2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  myState: {fileID: 0}
+  myStates: {fileID: 0}
 --- !u!1 &5222406254354917404
 GameObject:
   m_ObjectHideFlags: 0

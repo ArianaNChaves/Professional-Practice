@@ -12,9 +12,12 @@ public class EnemySO : ScriptableObject
     [SerializeField] private float damage;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackRate;
+    [SerializeField] private float rotationSpeed;
     
-    [Header("Spawn Settings")]
+    [Header("Life cycle Settings")]
     [SerializeField] private Vector2 spawnRateBetween;
+    [SerializeField] private float timeToDespawn;
+    [SerializeField] private float deathForce;
 
     [Header("Time Settings")] 
     [SerializeField] private float enemyTimeValue;
@@ -26,4 +29,7 @@ public class EnemySO : ScriptableObject
     public float AttackRate { get => attackRate; set => attackRate = value; }
     public Vector2 SpawnRate { get => spawnRateBetween; set => spawnRateBetween = value; }
     public float EnemyTimeValue { get => enemyTimeValue; set => enemyTimeValue = value; }
+    public float TimeToDespawn { get => timeToDespawn; set => timeToDespawn = value; }
+    public float DeathForce { get => deathForce; set => deathForce = value; }
+    public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
 }
