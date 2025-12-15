@@ -47,9 +47,19 @@ public class DeprecatedEnemy : BaseEnemy
         // EnemyRigidbody.useGravity = true;
         isInScene = true;
         _isPlayer = false;
-        // Reiniciar target e indicadores al reactivar desde el pool
-        target = null;
+        // Reiniciar indicadores al reactivar desde el pool
         IsInRange = false;
+        // Mantener un target válido para evitar NRE en Update():
+        // si hay un objetivo pendiente (spawnPoint) en la lista, tomarlo de inmediato;
+        // de lo contrario, si existe player, usarlo como fallback.
+        if (_targetsList != null && _targetsList.Count > 0)
+        {
+            target = _targetsList[0];
+        }
+        else if (player)
+        {
+            target = player;
+        }
         // _collider.enabled = true;
         // EnemyRigidbody.mass = NormalMass;
         // EnemyRigidbody.drag = QuietDrag;
@@ -98,6 +108,12 @@ public class DeprecatedEnemy : BaseEnemy
             case State.Attacking:
             {
                 EnemyRigidbody.drag = QuietDrag;
+                if (!target || !Utilities.CompareLayerAndMask(playerLayer, target.layer))
+                {
+                    // Si no hay target o el target actual no es el player, volver a Idle
+                    StateRoutine = StartCoroutine(Idling());
+                    break;
+                }
                 _targetDamageable = target.GetComponent<IDamageable>();
                 StateRoutine = StartCoroutine(Attacking());
                 break;
@@ -141,6 +157,13 @@ public class DeprecatedEnemy : BaseEnemy
                 yield return null;
                 ChangeState(State.Idle);
             }
+            // Si el target fue destruido o quedó null durante el movimiento, volver a Idle
+            if (!target)
+            {
+                yield return null;
+                ChangeState(State.Idle);
+                continue;
+            }
             
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
             Vector3 newVelocity = TargetDirection * MoveSpeed;
@@ -153,6 +176,7 @@ public class DeprecatedEnemy : BaseEnemy
     {
         enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
+        // Mantener prioridad: primero spawnPoint (siempre presente), luego player
         CheckTargets();
         // Si no hay un objetivo pendiente (por ejemplo, spawn point), usar el jugador como fallback
         if (!target && player)
@@ -245,6 +269,7 @@ public class DeprecatedEnemy : BaseEnemy
 
     private bool ReachTarget()
     {
+        if (!target) return false;
         _isPlayer = Utilities.CompareLayerAndMask(playerLayer, target.layer);
         return Vector3.Distance(transform.position, target.transform.position) < AttackRange;
     }
