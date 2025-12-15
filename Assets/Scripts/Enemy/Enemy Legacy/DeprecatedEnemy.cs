@@ -34,30 +34,40 @@ public class DeprecatedEnemy : BaseEnemy
             ChangeState(State.Idle);
         }
     }
-    
+
+    private void Update()
+    {
+        Debug.Log(target.name);
+    }
+
     public void Activate()
     {
         Health = enemyData.MaxHealth;
-        EnemyRigidbody.velocity = Vector3.zero;
-        EnemyRigidbody.useGravity = true;
-        _collider.enabled = true;
-        EnemyRigidbody.mass = NormalMass;
-        EnemyRigidbody.drag = QuietDrag;
-        ChangeState(State.Idle);
+        // EnemyRigidbody.velocity = Vector3.zero;
+        // EnemyRigidbody.useGravity = true;
+        isInScene = true;
+        _isPlayer = false;
+        // Reiniciar target e indicadores al reactivar desde el pool
+        target = null;
+        IsInRange = false;
+        // _collider.enabled = true;
+        // EnemyRigidbody.mass = NormalMass;
+        // EnemyRigidbody.drag = QuietDrag;
         OnSpawn?.Invoke(this);
+        ChangeState(State.Idle);
     }
     
     protected override IEnumerator Death()
     {
-        EnemyRigidbody.useGravity = false;
+        // EnemyRigidbody.useGravity = false;
         isInScene = false;
-        _collider.enabled = false;
+        // _collider.enabled = false;
         _targetsList.Clear();
-        EnemyRigidbody.drag = BaseDrag;
-        EnemyRigidbody.mass = DeathMass;
+        // EnemyRigidbody.drag = BaseDrag;
+        // EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
-        EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
-        EnemyRigidbody.useGravity = true;
+        // EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
+        // EnemyRigidbody.useGravity = true;
         OnEnemyDeath?.Invoke();
         yield return new WaitForSeconds(timeToDespawn);
         ReturnObjectToPool();
@@ -105,6 +115,7 @@ public class DeprecatedEnemy : BaseEnemy
     public override void ReturnObjectToPool()
     {
         this.gameObject.SetActive(false);
+        PoolManager.Instance.ReturnToPool(this);
     }
 
     protected override IEnumerator Moving()
@@ -143,7 +154,8 @@ public class DeprecatedEnemy : BaseEnemy
         enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
         CheckTargets();
-        if (isInScene)
+        // Si no hay un objetivo pendiente (por ejemplo, spawn point), usar el jugador como fallback
+        if (!target && player)
         {
             target = player;
         }
@@ -195,16 +207,18 @@ public class DeprecatedEnemy : BaseEnemy
         _targetsList.Add(newSpawnPoint.gameObject);
     }
     
-    public void SetTargetList(GameObject[] newTarget)
+    public void SetTargetPlayer(GameObject newTarget)
     {
-        _targetsList.AddRange(newTarget);
+        _targetsList.Add(newTarget);
+        player = newTarget;
     }
     private void CheckTargets()
     {
         if (_targetsList.Count > 0)
         {
             target = _targetsList[0];
-            if (!_isPlayer)
+            
+            if (!Utilities.CompareLayerAndMask(playerLayer, target.layer))
             {
                 _targetsList.RemoveAt(0);
             }
@@ -215,10 +229,10 @@ public class DeprecatedEnemy : BaseEnemy
         }
     }
 
-    public void SetPlayer(GameObject newPlayer)
-    {
-        player = newPlayer;
-    }
+    // public void SetPlayer(GameObject newPlayer)
+    // {
+    //     player = newPlayer;
+    // }
     public override void TakeDamage(float damage)
     {
         Health -= damage;

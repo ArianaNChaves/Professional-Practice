@@ -18581,6 +18581,10 @@ PrefabInstance:
       value: 0.207
       objectReference: {fileID: 0}
     - target: {fileID: 5443252146387407880, guid: 30f1c684b1240b540b3625f7c463e72f, type: 3}
+      propertyPath: normalEnemyPrefabSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5443252146387407880, guid: 30f1c684b1240b540b3625f7c463e72f, type: 3}
       propertyPath: normalDeprecatedEnemyPrefab
       value: 
       objectReference: {fileID: 8671208108968370732, guid: 6f85b028493b96c47960618ebd1cbc13, type: 3}

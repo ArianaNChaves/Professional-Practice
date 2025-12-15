@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerEnemyIntereact : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        DeprecatedEnemy.OnSpawn += GivePlayerGameObject;
-    }
-    private void OnDisable()
-    {
-        DeprecatedEnemy.OnSpawn -= GivePlayerGameObject;
-    }
-
-    private void GivePlayerGameObject(DeprecatedEnemy newDeprecatedEnemy)
-    {
-        newDeprecatedEnemy.SetPlayer(gameObject);
-    }
+    // private void OnEnable()
+    // {
+    //     DeprecatedEnemy.OnSpawn += GivePlayerGameObject;
+    // }
+    // private void OnDisable()
+    // {
+    //     DeprecatedEnemy.OnSpawn -= GivePlayerGameObject;
+    // }
+    //
+    // private void GivePlayerGameObject(DeprecatedEnemy newDeprecatedEnemy)
+    // {
+    //     newDeprecatedEnemy.SetPlayer(gameObject);
+    // }
 }
