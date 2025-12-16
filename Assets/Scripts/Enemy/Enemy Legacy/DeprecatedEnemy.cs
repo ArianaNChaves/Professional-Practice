@@ -18,6 +18,7 @@ public class DeprecatedEnemy : BaseEnemy
     private IDamageable _targetDamageable;
     private bool _isPlayer = false;
     private List<GameObject> _targetsList;
+    private bool _isDead;
 
     protected override void Awake()
     {
@@ -35,27 +36,28 @@ public class DeprecatedEnemy : BaseEnemy
         }
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        Debug.Log(target.name);
+        StopAllCoroutines();
     }
 
     public void Activate()
     {
+        _isDead = false;
         Health = enemyData.MaxHealth;
         // EnemyRigidbody.velocity = Vector3.zero;
         // EnemyRigidbody.useGravity = true;
         isInScene = true;
         _isPlayer = false;
         IsInRange = false;
-        if (_targetsList != null && _targetsList.Count > 0)
-        {
-            target = _targetsList[0];
-        }
-        else if (player)
-        {
-            target = player;
-        }
+        // if (_targetsList != null && _targetsList.Count > 0)
+        // {
+        //     target = _targetsList[0];
+        // }
+        // else if (player)
+        // {
+        //     target = player;
+        // }
         // _collider.enabled = true;
         // EnemyRigidbody.mass = NormalMass;
         // EnemyRigidbody.drag = QuietDrag;
@@ -63,24 +65,38 @@ public class DeprecatedEnemy : BaseEnemy
         ChangeState(State.Idle);
     }
     
-    protected override IEnumerator Death()
+    protected override void Death()
     {
+        if (_isDead) return; // guard against re-entry
+        _isDead = true;
         // EnemyRigidbody.useGravity = false;
         isInScene = false;
         // _collider.enabled = false;
         _targetsList.Clear();
+        OnEnemyDeath?.Invoke();
         // EnemyRigidbody.drag = BaseDrag;
         // EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
         // EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         // EnemyRigidbody.useGravity = true;
-        OnEnemyDeath?.Invoke();
-        yield return new WaitForSeconds(timeToDespawn);
-        ReturnObjectToPool();
+        StopAllCoroutines();
+        ReturnObjectToPool(); //todo que espere un tiempo antes de desaparecer para que se vea la animacion de muerte
+    }
+
+    private IEnumerator DespawnAfter(float t)
+    {
+        if (t > 0f)
+        {
+            yield return new WaitForSeconds(t);
+        }
     }
     
     protected override void ChangeState(State newState)
     {
+        if (_isDead && newState != State.Death)
+        {
+            return; 
+        }
         if (StateRoutine != null)
         {
             StopCoroutine(StateRoutine); 
@@ -115,7 +131,7 @@ public class DeprecatedEnemy : BaseEnemy
             }
             case State.Death:
             {
-                StateRoutine = StartCoroutine(Death());
+                Death();
                 break;
             }
             default:
@@ -125,7 +141,7 @@ public class DeprecatedEnemy : BaseEnemy
     
     public override void ReturnObjectToPool()
     {
-        this.gameObject.SetActive(false);
+        // this.gameObject.SetActive(false);
         PoolManager.Instance.ReturnToPool(this);
     }
 
@@ -251,11 +267,15 @@ public class DeprecatedEnemy : BaseEnemy
     // }
     public override void TakeDamage(float damage)
     {
+        if (_isDead) return;
         Health -= damage;
         if (Health <= 0)
         {
             Health = 0;
-            ChangeState(State.Death);
+            if (CurrentState != State.Death)
+            {
+                ChangeState(State.Death);
+            }
         }
     }
 

@@ -60,7 +60,7 @@ public abstract class BaseEnemy : MonoBehaviour, IDamageable, IPooleable
     public abstract void TakeDamage(float damage);
 
 
-    protected abstract IEnumerator Death();
+    protected abstract void Death();
     protected abstract IEnumerator Moving();
     protected abstract IEnumerator Idling();
     protected abstract IEnumerator Attacking();
