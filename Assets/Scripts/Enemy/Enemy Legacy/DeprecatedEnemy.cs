@@ -47,11 +47,7 @@ public class DeprecatedEnemy : BaseEnemy
         // EnemyRigidbody.useGravity = true;
         isInScene = true;
         _isPlayer = false;
-        // Reiniciar indicadores al reactivar desde el pool
         IsInRange = false;
-        // Mantener un target válido para evitar NRE en Update():
-        // si hay un objetivo pendiente (spawnPoint) en la lista, tomarlo de inmediato;
-        // de lo contrario, si existe player, usarlo como fallback.
         if (_targetsList != null && _targetsList.Count > 0)
         {
             target = _targetsList[0];
@@ -110,7 +106,6 @@ public class DeprecatedEnemy : BaseEnemy
                 EnemyRigidbody.drag = QuietDrag;
                 if (!target || !Utilities.CompareLayerAndMask(playerLayer, target.layer))
                 {
-                    // Si no hay target o el target actual no es el player, volver a Idle
                     StateRoutine = StartCoroutine(Idling());
                     break;
                 }
@@ -157,7 +152,6 @@ public class DeprecatedEnemy : BaseEnemy
                 yield return null;
                 ChangeState(State.Idle);
             }
-            // Si el target fue destruido o quedó null durante el movimiento, volver a Idle
             if (!target)
             {
                 yield return null;
@@ -176,9 +170,7 @@ public class DeprecatedEnemy : BaseEnemy
     {
         enemyAnimation.IdlingAnimation();
         yield return new WaitForSeconds(startingWaitTime);
-        // Mantener prioridad: primero spawnPoint (siempre presente), luego player
         CheckTargets();
-        // Si no hay un objetivo pendiente (por ejemplo, spawn point), usar el jugador como fallback
         if (!target && player)
         {
             target = player;
@@ -201,14 +193,15 @@ public class DeprecatedEnemy : BaseEnemy
         while (CurrentState == State.Attacking && IsInRange)
         {
             Distance = Vector3.Distance(transform.position, player.transform.position);
+            EnemyRigidbody.velocity = Vector3.zero;
             FaceTarget();
             if (Distance > AttackRange)
             {
                 IsInRange = false;
-                yield return null;
                 ChangeState(State.Moving);
+                yield break;
+                
             }
-            EnemyRigidbody.velocity = Vector3.zero;
             enemyAnimation.AttackingAnimation();
             _targetDamageable?.TakeDamage(Damage);
             yield return new WaitForSeconds(AttackRate);
