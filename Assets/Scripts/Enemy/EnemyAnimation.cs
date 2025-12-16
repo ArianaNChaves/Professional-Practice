@@ -33,10 +33,10 @@ public class EnemyAnimation : MonoBehaviour
     }
     public void DeathAnimation()
     {
-        // animator.Play("die");
-        animator.SetBool(IsMoving, false);
-        // animator.SetBool(IsDeath, true);
-        animator.SetTrigger(IsDead);
+        animator.Play("die");
+        // animator.SetBool(IsMoving, false);
+        // // animator.SetBool(IsDeath, true);
+        // animator.SetTrigger(IsDead);
 
     }
 }

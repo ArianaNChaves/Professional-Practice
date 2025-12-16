@@ -62,7 +62,9 @@ public class DeprecatedEnemy : BaseEnemy
         // EnemyRigidbody.mass = NormalMass;
         // EnemyRigidbody.drag = QuietDrag;
         OnSpawn?.Invoke(this);
-        ChangeState(State.Idle);
+        // ChangeState(State.Idle);
+        CurrentState = State.Idle;
+        StateRoutine = StartCoroutine(Idling());
     }
     
     protected override void Death()
@@ -80,7 +82,8 @@ public class DeprecatedEnemy : BaseEnemy
         // EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
         // EnemyRigidbody.useGravity = true;
         StopAllCoroutines();
-        ReturnObjectToPool(); //todo que espere un tiempo antes de desaparecer para que se vea la animacion de muerte
+        StartCoroutine(DespawnAfter(timeToDespawn));
+         //todo que espere un tiempo antes de desaparecer para que se vea la animacion de muerte
     }
 
     private IEnumerator DespawnAfter(float t)
@@ -88,6 +91,7 @@ public class DeprecatedEnemy : BaseEnemy
         if (t > 0f)
         {
             yield return new WaitForSeconds(t);
+            ReturnObjectToPool();
         }
     }
     
