@@ -134,8 +134,8 @@ public class DeprecatedEnemy : BaseEnemy
         Vector3 initialVelocity = Vector3.zero;
         if (!target)
         {
-            yield return null;
             ChangeState(State.Idle);
+            yield break;
         }
         while (CurrentState == State.Moving)
         {
@@ -144,18 +144,18 @@ public class DeprecatedEnemy : BaseEnemy
             if (ReachTarget() && _isPlayer)
             {
                 IsInRange = true;
-                yield return null;
                 ChangeState(State.Attacking);
+                yield break;
             }
             if (ReachTarget() && !_isPlayer)
             {
-                yield return null;
                 ChangeState(State.Idle);
+                yield break;
             }
             if (!target)
             {
-                yield return null;
                 ChangeState(State.Idle);
+                yield break;
                 continue;
             }
             
@@ -178,8 +178,8 @@ public class DeprecatedEnemy : BaseEnemy
         if (target)
         {
             FaceTarget();
-            yield return null;
             ChangeState(State.Moving);
+            yield break;
         }
     }
     
@@ -187,8 +187,8 @@ public class DeprecatedEnemy : BaseEnemy
     {
         if (_targetDamageable == null || !player)
         {
-            yield return null;
             ChangeState(State.Idle);
+            yield break;
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
@@ -200,7 +200,6 @@ public class DeprecatedEnemy : BaseEnemy
                 IsInRange = false;
                 ChangeState(State.Moving);
                 yield break;
-                
             }
             enemyAnimation.AttackingAnimation();
             _targetDamageable?.TakeDamage(Damage);
