@@ -11,6 +11,15 @@ public class EnemyAnimation : MonoBehaviour
     private static readonly int IsIdle = Animator.StringToHash("isIdle");
     [SerializeField] private Animator animator;
 
+    public void ResetAnimations()
+    {
+        animator.ResetTrigger(IsAttacking);
+        animator.ResetTrigger(IsDead);
+        animator.SetBool(IsMoving, false);
+        animator.SetBool(IsIdle, true);
+        animator.Rebind();
+    }
+    
     public void AttackingAnimation()
     {
         // animator.CrossFade("attack-melee-left", 0f);
@@ -33,10 +42,8 @@ public class EnemyAnimation : MonoBehaviour
     }
     public void DeathAnimation()
     {
-        animator.Play("die");
-        // animator.SetBool(IsMoving, false);
-        // // animator.SetBool(IsDeath, true);
-        // animator.SetTrigger(IsDead);
-
+        // animator.Play("die");
+        animator.SetBool(IsMoving, false);
+        animator.SetTrigger(IsDead);
     }
 }

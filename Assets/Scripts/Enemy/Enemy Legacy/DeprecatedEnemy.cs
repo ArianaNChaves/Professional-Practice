@@ -45,11 +45,14 @@ public class DeprecatedEnemy : BaseEnemy
     {
         _isDead = false;
         Health = enemyData.MaxHealth;
-        // EnemyRigidbody.velocity = Vector3.zero;
-        // EnemyRigidbody.useGravity = true;
         isInScene = true;
         _isPlayer = false;
         IsInRange = false;
+        _collider.enabled = true;
+        EnemyRigidbody.velocity = Vector3.zero;
+        EnemyRigidbody.useGravity = true;
+        EnemyRigidbody.mass = NormalMass;
+        EnemyRigidbody.drag = QuietDrag;
         // if (_targetsList != null && _targetsList.Count > 0)
         // {
         //     target = _targetsList[0];
@@ -58,39 +61,34 @@ public class DeprecatedEnemy : BaseEnemy
         // {
         //     target = player;
         // }
-        // _collider.enabled = true;
-        // EnemyRigidbody.mass = NormalMass;
-        // EnemyRigidbody.drag = QuietDrag;
         OnSpawn?.Invoke(this);
-        // ChangeState(State.Idle);
-        CurrentState = State.Idle;
-        StateRoutine = StartCoroutine(Idling());
+        enemyAnimation.ResetAnimations();
+        ChangeState(State.Idle);
     }
     
     protected override void Death()
     {
-        if (_isDead) return; // guard against re-entry
+        if (_isDead) return;
         _isDead = true;
-        // EnemyRigidbody.useGravity = false;
         isInScene = false;
-        // _collider.enabled = false;
         _targetsList.Clear();
         OnEnemyDeath?.Invoke();
-        // EnemyRigidbody.drag = BaseDrag;
-        // EnemyRigidbody.mass = DeathMass;
         enemyAnimation.DeathAnimation();
-        // EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
-        // EnemyRigidbody.useGravity = true;
+        EnemyRigidbody.useGravity = false;
+        _collider.enabled = false;
+        EnemyRigidbody.drag = BaseDrag;
+        EnemyRigidbody.mass = DeathMass;
+        EnemyRigidbody.AddForce(Vector3.up * deathForce, ForceMode.Impulse);
+        EnemyRigidbody.useGravity = true;
         StopAllCoroutines();
         StartCoroutine(DespawnAfter(timeToDespawn));
-         //todo que espere un tiempo antes de desaparecer para que se vea la animacion de muerte
     }
 
-    private IEnumerator DespawnAfter(float t)
+    private IEnumerator DespawnAfter(float time)
     {
-        if (t > 0f)
+        if (time > 0f)
         {
-            yield return new WaitForSeconds(t);
+            yield return new WaitForSeconds(time);
             ReturnObjectToPool();
         }
     }
