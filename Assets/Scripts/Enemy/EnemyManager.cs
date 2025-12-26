@@ -12,17 +12,17 @@ public class EnemyManager : MonoBehaviour
     
     private void OnEnable()
     {
-        DeprecatedEnemy.OnSpawn += EnemySpawn;
+        Enemy.OnSpawn += EnemySpawn;
     }
     private void OnDisable()
     {
-        DeprecatedEnemy.OnSpawn -= EnemySpawn;
+        Enemy.OnSpawn -= EnemySpawn;
     }
 
-    private void EnemySpawn(DeprecatedEnemy newDeprecatedEnemy)
+    private void EnemySpawn(Enemy newEnemy)
     {
         // _enemiesSpawned++;
-        newDeprecatedEnemy.SetTargetPlayer(player); 
+        newEnemy.SetTargetPlayer(player); 
     }
     
     public bool EnemiesCanSpawn()

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class DeprecatedEnemy : BaseEnemy
+public class Enemy : BaseEnemy
 {
     public static event Action OnEnemyDeath;
-    public static event Action<DeprecatedEnemy> OnSpawn;
+    public static event Action<Enemy> OnSpawn;
     
     [SerializeField] private float deathForce;
     [SerializeField] private float timeToDespawn;
