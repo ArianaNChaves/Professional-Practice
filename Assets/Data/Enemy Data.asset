@@ -19,6 +19,6 @@ MonoBehaviour:
   attackRate: 2
   rotationSpeed: 4
   spawnRateBetween: {x: 1, y: 10}
-  timeToDespawn: 4
+  timeToDespawn: 3
   deathForce: 30
-  enemyTimeValue: 20
+  enemyTimeValue: 30

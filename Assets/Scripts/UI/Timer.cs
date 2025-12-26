@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public static event Action OnTimeReached;
+    
     [SerializeField] private EnemySO enemyData;
     [SerializeField] private PlayerSO playerData;
     [SerializeField] private EffectsSO effectsData;
@@ -27,6 +29,7 @@ public class Timer : MonoBehaviour
     private int _secondTime;
     private int _lastMinute;
     private bool _godMode;
+    private bool _winGame = false;
     private string _currentTrack;
     private AudioManager _audioManager;
     
@@ -52,9 +55,10 @@ public class Timer : MonoBehaviour
         if (_timeLeft < 0f)
         {
             _timeLeft = 0f;
+            _winGame = true;
             if (!_godMode)
             {
-                SceneManager.LoadScene("Credits");
+                OnTimeReached?.Invoke();
             }
         }
         UpdateTime();
@@ -76,6 +80,7 @@ public class Timer : MonoBehaviour
 
     private void OnDiscountTime()
     {
+        if (_winGame) return;
         _timeLeft -= enemyData.EnemyTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeDiscount());
@@ -83,7 +88,7 @@ public class Timer : MonoBehaviour
 
     private void OnAddTime()
     {
-        if (_godMode) return;
+        if (_godMode || _winGame) return;
         _timeLeft += playerData.PlayerHitTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeAdd());

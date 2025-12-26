@@ -19,6 +19,7 @@ public class Enemy : BaseEnemy
     private bool _isPlayer = false;
     private List<GameObject> _targetsList;
     private bool _isDead;
+    private bool _winGame = false;
 
     protected override void Awake()
     {
@@ -36,8 +37,14 @@ public class Enemy : BaseEnemy
         }
     }
 
+    private void OnEnable()
+    {
+        Timer.OnTimeReached += StopEnemy;
+    }
+
     private void OnDisable()
     {
+        Timer.OnTimeReached -= StopEnemy;
         StopAllCoroutines();
     }
 
@@ -53,14 +60,6 @@ public class Enemy : BaseEnemy
         EnemyRigidbody.useGravity = true;
         EnemyRigidbody.mass = NormalMass;
         EnemyRigidbody.drag = QuietDrag;
-        // if (_targetsList != null && _targetsList.Count > 0)
-        // {
-        //     target = _targetsList[0];
-        // }
-        // else if (player)
-        // {
-        //     target = player;
-        // }
         OnSpawn?.Invoke(this);
         enemyAnimation.ResetAnimations();
         ChangeState(State.Idle);
@@ -68,6 +67,7 @@ public class Enemy : BaseEnemy
     
     protected override void Death()
     {
+        if (_winGame) return;
         if (_isDead) return;
         _isDead = true;
         isInScene = false;
@@ -95,6 +95,7 @@ public class Enemy : BaseEnemy
     
     protected override void ChangeState(State newState)
     {
+        if (_winGame) return;
         if (_isDead && newState != State.Death)
         {
             return; 
@@ -143,7 +144,6 @@ public class Enemy : BaseEnemy
     
     public override void ReturnObjectToPool()
     {
-        // this.gameObject.SetActive(false);
         PoolManager.Instance.ReturnToPool(this);
     }
 
@@ -174,7 +174,6 @@ public class Enemy : BaseEnemy
             {
                 ChangeState(State.Idle);
                 yield break;
-                continue;
             }
             
             TargetDirection = (target.transform.position - EnemyRigidbody.position).normalized;
@@ -228,6 +227,7 @@ public class Enemy : BaseEnemy
     
     private void FaceTarget()
     {
+        if (_winGame) return;
         if (!target) return;
         Vector3 newDirection = (target.transform.position - transform.position).normalized;
         newDirection.y = 0f;
@@ -248,6 +248,7 @@ public class Enemy : BaseEnemy
     }
     private void CheckTargets()
     {
+        if (_winGame) return;
         if (_targetsList.Count > 0)
         {
             target = _targetsList[0];
@@ -260,13 +261,10 @@ public class Enemy : BaseEnemy
             {
                 player = target;
             }
+            
         }
     }
-
-    // public void SetPlayer(GameObject newPlayer)
-    // {
-    //     player = newPlayer;
-    // }
+    
     public override void TakeDamage(float damage)
     {
         if (_isDead) return;
@@ -280,7 +278,13 @@ public class Enemy : BaseEnemy
             }
         }
     }
-
+    
+    private void StopEnemy()
+    {
+        _winGame = true;
+        StopAllCoroutines();
+    }
+    
     private bool ReachTarget()
     {
         if (!target) return false;

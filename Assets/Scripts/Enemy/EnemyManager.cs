@@ -7,7 +7,6 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private GameObject _lastTarget;
-    private int _enemiesSpawned = 0;
     private bool _enemiesCanSpawn = true;
     
     private void OnEnable()
