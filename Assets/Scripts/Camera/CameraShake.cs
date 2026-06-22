@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
@@ -18,13 +16,19 @@ public class CameraShake : MonoBehaviour
     }
     private void OnEnable()
     {
-        BallCollisions.OnBallCrash += Shake;
+        MessageSystem.Subscribe<BallCrashEvent>(OnBallCrash);
     }
     
     private void OnDisable()
     {
-        BallCollisions.OnBallCrash -= Shake;
+        MessageSystem.Unsubscribe<BallCrashEvent>(OnBallCrash);
     }
+
+    private void OnBallCrash(BallCrashEvent ballCrashEvent)
+    {
+        Shake();
+    }
+
     private void Shake()
     {
         AudioManager.Instance.PlayEffect("Ball Impact");

@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
-    public static event Action OnPauseGame;
-    public static event Action Oninteraction;
-    public static event Action OnCheats;
     [SerializeField] private PlayerMovement playerMovement;
     
     private PlayerInputActions _playerInputActions;
@@ -44,14 +38,14 @@ public class PlayerInputs : MonoBehaviour
     }
     private void OnPause(InputAction.CallbackContext context)
     {
-        OnPauseGame?.Invoke();
+        MessageSystem.Publish(new PauseRequestedEvent());
     }
     private void OnInteract(InputAction.CallbackContext context)
     {
-        Oninteraction?.Invoke();
+        MessageSystem.Publish(new InteractRequestedEvent());
     }
     private void OnCheatsUsed(InputAction.CallbackContext context)
     {
-        OnCheats?.Invoke();
+        MessageSystem.Publish(new CheatsRequestedEvent());
     }
 }

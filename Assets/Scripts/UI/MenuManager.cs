@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private string playSceneName;

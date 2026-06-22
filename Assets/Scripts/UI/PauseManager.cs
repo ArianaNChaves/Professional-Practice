@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement; // Required for scene management
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,11 +9,16 @@ public class PauseManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerInputs.OnPauseGame += TogglePause;
+        MessageSystem.Subscribe<PauseRequestedEvent>(OnPauseRequested);
     }
     private void OnDisable()
     {
-        PlayerInputs.OnPauseGame += TogglePause;
+        MessageSystem.Unsubscribe<PauseRequestedEvent>(OnPauseRequested);
+    }
+
+    private void OnPauseRequested(PauseRequestedEvent pauseRequestedEvent)
+    {
+        TogglePause();
     }
 
     private void TogglePause()

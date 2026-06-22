@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeDeviceUi : MonoBehaviour
@@ -10,11 +7,16 @@ public class ChangeDeviceUi : MonoBehaviour
 
     private void OnEnable()
     {
-        ControlDetection.OnControlChange += ChangeUiImage;
+        MessageSystem.Subscribe<ControlDeviceChangedEvent>(OnControlDeviceChanged);
     }
     private void OnDisable()
     {
-        ControlDetection.OnControlChange -= ChangeUiImage;
+        MessageSystem.Unsubscribe<ControlDeviceChangedEvent>(OnControlDeviceChanged);
+    }
+
+    private void OnControlDeviceChanged(ControlDeviceChangedEvent controlDeviceChangedEvent)
+    {
+        ChangeUiImage(controlDeviceChangedEvent.Device);
     }
 
     private void ChangeUiImage(ControlDevice device)

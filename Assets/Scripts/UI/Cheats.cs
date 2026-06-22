@@ -1,19 +1,22 @@
-using System;
 using UnityEngine;
 
 public class Cheats : MonoBehaviour
 {
-    public static event Action OnGodMode;
     [SerializeField] private GameObject[] cheatsOn;
     [SerializeField] private GameObject[] cheatsOff;
     private bool _cheatsEnabled = false;
     private void OnEnable()
     {
-        PlayerInputs.OnCheats += CheatsToggle;
+        MessageSystem.Subscribe<CheatsRequestedEvent>(OnCheatsRequested);
     }
     private void OnDisable()
     {
-        PlayerInputs.OnCheats -= CheatsToggle;
+        MessageSystem.Unsubscribe<CheatsRequestedEvent>(OnCheatsRequested);
+    }
+
+    private void OnCheatsRequested(CheatsRequestedEvent cheatsRequestedEvent)
+    {
+        CheatsToggle();
     }
 
     private void CheatsToggle()
@@ -26,7 +29,7 @@ public class Cheats : MonoBehaviour
             cheatsOn[i].SetActive(_cheatsEnabled);
             cheatsOff[i].SetActive(!_cheatsEnabled);
         }
-        OnGodMode?.Invoke();
+        MessageSystem.Publish(new GodModeChangedEvent(_cheatsEnabled));
     }
     
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -14,12 +12,17 @@ public class ShaderAppear : MonoBehaviour
     
     private void OnEnable()
     {
-        BallCollisions.OnBallWallCrash += PlayShader;
+        MessageSystem.Subscribe<BallWallCrashEvent>(OnBallWallCrash);
     }
 
     private void OnDisable()
     {
-        BallCollisions.OnBallWallCrash -= PlayShader;
+        MessageSystem.Unsubscribe<BallWallCrashEvent>(OnBallWallCrash);
+    }
+
+    private void OnBallWallCrash(BallWallCrashEvent ballWallCrashEvent)
+    {
+        PlayShader(ballWallCrashEvent.Position);
     }
 
     private void PlayShader(Vector3 position)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -63,15 +62,20 @@ public class Timer : MonoBehaviour
     private void OnEnable()
     {
         DeprecatedEnemy.OnEnemyDeath += OnDiscountTime;
-        PlayerHealth.OnPlayerHit += OnAddTime;
-        Cheats.OnGodMode += GodMode;
+        MessageSystem.Subscribe<PlayerHitEvent>(OnPlayerHit);
+        MessageSystem.Subscribe<GodModeChangedEvent>(OnGodModeChanged);
     }
 
     private void OnDisable()
     {
         DeprecatedEnemy.OnEnemyDeath -= OnDiscountTime;
-        PlayerHealth.OnPlayerHit -= OnAddTime;
-        Cheats.OnGodMode -= GodMode;
+        MessageSystem.Unsubscribe<PlayerHitEvent>(OnPlayerHit);
+        MessageSystem.Unsubscribe<GodModeChangedEvent>(OnGodModeChanged);
+    }
+
+    private void OnPlayerHit(PlayerHitEvent playerHitEvent)
+    {
+        OnAddTime();
     }
 
     private void OnDiscountTime()
@@ -147,8 +151,8 @@ public class Timer : MonoBehaviour
         _panel.color = _baseColor;
     }
 
-    private void GodMode()
+    private void OnGodModeChanged(GodModeChangedEvent godModeChangedEvent)
     {
-        _godMode = !_godMode;
+        _godMode = godModeChangedEvent.IsEnabled;
     }
 }

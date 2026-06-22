@@ -1,13 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallCollisions : MonoBehaviour
 {
-    public static event Action OnBallCrash;
-    public static event Action<Vector3> OnBallWallCrash;
-    
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField, Range(10f, 100f)] private float collisionRange;
@@ -28,8 +22,8 @@ public class BallCollisions : MonoBehaviour
         {
             if (_rigidbody.velocity.magnitude >= BallSpeed)
             {
-                OnBallCrash?.Invoke();
-                OnBallWallCrash?.Invoke(transform.position);
+                MessageSystem.Publish(new BallCrashEvent());
+                MessageSystem.Publish(new BallWallCrashEvent(transform.position));
             }
         }
         
@@ -37,7 +31,7 @@ public class BallCollisions : MonoBehaviour
         if (!(_rigidbody.velocity.magnitude >= collisionRange)) return;
         if (other.gameObject.TryGetComponent(out IDamageable damageable))
         {
-            OnBallCrash?.Invoke();
+            MessageSystem.Publish(new BallCrashEvent());
             damageable.TakeDamage(_damage); 
         }
     }

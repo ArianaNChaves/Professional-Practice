@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class TutorialInteraction : MonoBehaviour
@@ -14,12 +10,17 @@ public class TutorialInteraction : MonoBehaviour
     }
     private void OnEnable()
     {
-        PlayerInputs.Oninteraction += PlayGame;
+        MessageSystem.Subscribe<InteractRequestedEvent>(OnInteractRequested);
     }
     
     private void OnDisable()
     {
-        PlayerInputs.Oninteraction -= PlayGame;
+        MessageSystem.Unsubscribe<InteractRequestedEvent>(OnInteractRequested);
+    }
+
+    private void OnInteractRequested(InteractRequestedEvent interactRequestedEvent)
+    {
+        PlayGame();
     }
 
     private void PlayGame()
