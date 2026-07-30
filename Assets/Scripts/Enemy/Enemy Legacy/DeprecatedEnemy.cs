@@ -117,6 +117,12 @@ public class DeprecatedEnemy : BaseEnemy
         }
         while (CurrentState == State.Moving)
         {
+            if (!target)
+            {
+                ReturnObjectToPool();
+                yield break;
+            }
+
             FaceTarget();
             enemyAnimation.WalkingAnimation();
             if (ReachTarget() && _isPlayer)
@@ -164,6 +170,12 @@ public class DeprecatedEnemy : BaseEnemy
         }
         while (CurrentState == State.Attacking && IsInRange)
         {
+            if (!player)
+            {
+                ReturnObjectToPool();
+                yield break;
+            }
+
             Distance = Vector3.Distance(transform.position, player.transform.position);
             FaceTarget();
             if (Distance > AttackRange)
@@ -231,6 +243,8 @@ public class DeprecatedEnemy : BaseEnemy
 
     private bool ReachTarget()
     {
+        if (!target) return false;
+
         _isPlayer = Utilities.CompareLayerAndMask(playerLayer, target.layer);
         return Vector3.Distance(transform.position, target.transform.position) < AttackRange;
     }

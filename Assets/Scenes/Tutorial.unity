@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4100,6 +4099,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 21474181}
     m_Modifications:
+    - target: {fileID: 1589674939812915906, guid: 2d0a7bf135754d442924e5570d5b754c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2220441744921098420, guid: 2d0a7bf135754d442924e5570d5b754c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11034,6 +11037,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1001 &1291088705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12418,7 +12422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1474195811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22481348, y: 0.02332397, z: -0.0053829188, w: 0.9741078}
+  m_LocalRotation: {x: 0.22481748, y: 0.022590743, z: -0.005213699, w: 0.9741251}
   m_LocalPosition: {x: -2.854094, y: 17.165709, z: -16.794765}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15350,19 +15354,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9741078
+      value: 0.974125
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22481348
+      value: 0.22481748
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.02332397
+      value: 0.022590745
       objectReference: {fileID: 0}
     - target: {fileID: 5216253313947748341, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0053829188
+      value: -0.005213699
       objectReference: {fileID: 0}
     - target: {fileID: 6620935157214559394, guid: 87e5bf8d25751e940a211a43106cc526, type: 3}
       propertyPath: collisionRange

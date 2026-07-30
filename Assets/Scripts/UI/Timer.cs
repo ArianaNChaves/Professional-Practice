@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public const string SavedTimeKey = "Save.TimerSeconds";
+
+    [SerializeField] private string winSceneName = "Win Cutscene";
     [SerializeField] private EnemySO enemyData;
     [SerializeField] private PlayerSO playerData;
     [SerializeField] private EffectsSO effectsData;
@@ -37,7 +40,9 @@ public class Timer : MonoBehaviour
         _lastMinute = _initialTime;
         _audioManager = AudioManager.Instance;
         
-        _timeLeft = _initialTime * 60f;
+        _timeLeft = PlayerPrefs.HasKey(SavedTimeKey)
+            ? PlayerPrefs.GetFloat(SavedTimeKey)
+            : _initialTime * 60f;
         UpdateTime();
 
         _panel = GetComponent<Image>();
@@ -53,7 +58,8 @@ public class Timer : MonoBehaviour
             _timeLeft = 0f;
             if (!_godMode)
             {
-                SceneManager.LoadScene("Credits");
+                ClearSavedTimer();
+                SceneManager.LoadScene(winSceneName);
             }
         }
         UpdateTime();
@@ -91,6 +97,23 @@ public class Timer : MonoBehaviour
         _timeLeft += playerData.PlayerHitTimeValue;
         StopAllCoroutines();
         StartCoroutine(ShakeAdd());
+    }
+
+    public void SaveTimer()
+    {
+        PlayerPrefs.SetFloat(SavedTimeKey, _timeLeft);
+        PlayerPrefs.Save();
+    }
+
+    public static bool HasSavedTimer()
+    {
+        return PlayerPrefs.HasKey(SavedTimeKey);
+    }
+
+    public static void ClearSavedTimer()
+    {
+        PlayerPrefs.DeleteKey(SavedTimeKey);
+        PlayerPrefs.Save();
     }
     
     private void UpdateTime()
