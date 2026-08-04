@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.discord.partnersdk": {
-      "version": "file:C:/Users/Usuario/Downloads/com.discord.partnersdk",
+      "version": "file:C:/Users/Ari/Downloads/com.discord.partnersdk",
       "depth": 0,
       "source": "local",
       "dependencies": {}
